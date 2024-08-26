@@ -1,6 +1,6 @@
-package com.vaccine.VaccinationMSystem.DAO;
+package com.wu.vaccine.VaccinationMSystem.DAO;
 
-import com.vaccine.VaccinationMSystem.entity.Citizen;
+import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
 
 import java.util.List;
 

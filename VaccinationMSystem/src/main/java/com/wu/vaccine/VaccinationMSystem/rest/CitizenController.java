@@ -1,4 +1,4 @@
-package com.vaccine.VaccinationMSystem.rest;
+package com.wu.vaccine.VaccinationMSystem.rest;
 
 
 import org.springframework.stereotype.Controller;

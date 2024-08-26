@@ -1,4 +1,4 @@
-package com.vaccine.VaccinationMSystem.entity;
+package com.wu.vaccine.VaccinationMSystem.entity;
 
 
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.vaccine.VaccinationMSystem;
+package com.wu.vaccine.VaccinationMSystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
