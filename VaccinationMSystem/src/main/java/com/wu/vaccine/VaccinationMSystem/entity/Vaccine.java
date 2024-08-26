@@ -8,4 +8,5 @@ public class Vaccine {
     private int  dose3Id;
     private String vacc_address;
 
+
 }
