@@ -1,11 +1,23 @@
 package com.wu.vaccine.VaccinationMSystem.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Vaccine")
 public class Vaccine {
+    @Column(name = "Certificate_No")
     private String certificateNo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Citizen_ID")
     private String citizenId;
+    @Column(name = "Dose1_ID")
     private int dose1Id;
+    @Column(name = "Dose2_ID")
     private int dose2Id;
-    private int  dose3Id;
+    @Column(name = "Dose3_ID")
+    private int dose3Id;
+    @Column(name = "Vaccination_Address")
     private String vacc_address;
 
     public Vaccine() {

@@ -1,24 +1,27 @@
 package com.wu.vaccine.VaccinationMSystem.entity;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
+import java.util.Date;
+@Entity
+@Table(name="Dose")
 public class Dose {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Dose_ID")
     private int doseId;
+    @Column(name="Citizen_ID")
     private String citizenId;
+    @Column(name="Dose_Name")
     private String doseName;
+    @Column(name="Vaccinated_By")
     private String doseGivenBy;
+    @Column(name="Dose_Date")
     private Date  given_date;
-    private String merchant;
+
     public Dose() {
     }
 
-    public String getMerchant() {
-        return merchant;
-    }
-
-    public void setMerchant(String merchant) {
-        this.merchant = merchant;
-    }
 
     public Date getGiven_date() {
         return given_date;
@@ -60,11 +63,11 @@ public class Dose {
         this.doseId = doseId;
     }
 
-    public Dose(String citizenId, String doseGivenBy, Date given_date, String merchant, String doseName, int doseId) {
+    public Dose(String citizenId, String doseGivenBy, Date given_date,  String doseName, int doseId) {
         this.citizenId = citizenId;
         this.doseGivenBy = doseGivenBy;
         this.given_date = given_date;
-        this.merchant = merchant;
+
         this.doseName = doseName;
         this.doseId = doseId;
     }
@@ -77,7 +80,7 @@ public class Dose {
                 ", doseName='" + doseName + '\'' +
                 ", doseGivenBy='" + doseGivenBy + '\'' +
                 ", given_date=" + given_date +
-                ", merchant='" + merchant + '\'' +
+
                 '}';
     }
 }

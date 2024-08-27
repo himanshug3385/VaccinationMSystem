@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CitizenDAO {
     Citizen registerCitizen(Citizen citizen);
-    Citizen getCitizenDetailsById(int citizenId);
+    Citizen getCitizenDetailsById(String citizenId);
     List<Citizen> getAllCitizenDetails();
     Citizen upDateCitizenDetails(Citizen citizen);
     void deleteCitizenDetails(Citizen citizen);

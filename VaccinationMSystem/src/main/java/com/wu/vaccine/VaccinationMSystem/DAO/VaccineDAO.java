@@ -11,5 +11,6 @@ public interface VaccineDAO {
     String getCertificateIdById(String citizenId);
     List<Dose> getDoseDetails(String citizenId);
     Vaccine getVaccineDetailsByID(String citizenId);
+
 }
 

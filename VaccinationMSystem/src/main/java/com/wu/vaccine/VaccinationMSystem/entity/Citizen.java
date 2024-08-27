@@ -1,16 +1,30 @@
 package com.wu.vaccine.VaccinationMSystem.entity;
 
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
+@Table(name="Citizen")
 public class Citizen {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Citizen_ID")
     private String citizenId;
+    @Column(name="Name")
     private String name;
+    @Column(name="Gender")
     private String gender;
+    @Column(name="Aadhar")
     private String addhar_no;
+    @Column(name="Contact")
     private String contact;
+    @Column(name="Last_Vaccinated")
     private Date last_vaccinated;
+    @Column(name="Vaccination_Status")
     private String vaccination_status;
+    @Column(name="Age")
     private int age;
 
     public Citizen(String citizenId, String name, String gender, String addhar_no, String contact, Date last_vaccinated, String vaccination_status, int age) {
