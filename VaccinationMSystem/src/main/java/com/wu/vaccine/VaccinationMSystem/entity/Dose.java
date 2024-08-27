@@ -7,9 +7,8 @@ import java.util.Date;
 @Table(name="Dose")
 public class Dose {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Dose_ID")
-    private int doseId;
+    private String doseId;
     @Column(name="Citizen_ID")
     private String citizenId;
     @Column(name="Dose_Name")
@@ -17,17 +16,17 @@ public class Dose {
     @Column(name="Vaccinated_By")
     private String doseGivenBy;
     @Column(name="Dose_Date")
-    private Date  given_date;
+    private String  given_date;
 
     public Dose() {
     }
 
 
-    public Date getGiven_date() {
+    public String getGiven_date() {
         return given_date;
     }
 
-    public void setGiven_date(Date given_date) {
+    public void setGiven_date(String given_date) {
         this.given_date = given_date;
     }
 
@@ -55,15 +54,15 @@ public class Dose {
         this.citizenId = citizenId;
     }
 
-    public int getDoseId() {
+    public String getDoseId() {
         return doseId;
     }
 
-    public void setDoseId(int doseId) {
+    public void setDoseId(String doseId) {
         this.doseId = doseId;
     }
 
-    public Dose(String citizenId, String doseGivenBy, Date given_date,  String doseName, int doseId) {
+    public Dose(String citizenId, String doseGivenBy, String given_date,  String doseName, String doseId) {
         this.citizenId = citizenId;
         this.doseGivenBy = doseGivenBy;
         this.given_date = given_date;

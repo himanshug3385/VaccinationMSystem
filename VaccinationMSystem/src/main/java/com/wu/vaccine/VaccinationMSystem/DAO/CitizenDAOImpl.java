@@ -1,12 +1,15 @@
 package com.wu.vaccine.VaccinationMSystem.DAO;
 
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
+import com.wu.vaccine.VaccinationMSystem.entity.Dose;
+import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -22,8 +25,11 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Override
     public Citizen registerCitizen(Citizen citizen) {
         Citizen res=  entityManager.merge(citizen);
+        entityManager.merge(new Vaccine("cjdf","0010","001A","001B","001C","pune"));
+        entityManager.merge(new Dose("34","ddf","244","covish","01A"));
         return res;
     }
+    
    //  get the citizen details by providing the citizen ID
     @Override
     public Citizen getCitizenDetailsById(String citizenId) {

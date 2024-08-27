@@ -8,22 +8,22 @@ public class Vaccine {
     @Column(name = "Certificate_No")
     private String certificateNo;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "Citizen_ID")
     private String citizenId;
     @Column(name = "Dose1_ID")
-    private int dose1Id;
+    private String dose1Id;
     @Column(name = "Dose2_ID")
-    private int dose2Id;
+    private String dose2Id;
     @Column(name = "Dose3_ID")
-    private int dose3Id;
+    private String dose3Id;
     @Column(name = "Vaccination_Address")
     private String vacc_address;
 
     public Vaccine() {
     }
 
-    public Vaccine(String certificateNo, String citizenId, int dose1Id, int dose2Id, int dose3Id, String vacc_address) {
+    public Vaccine(String certificateNo, String citizenId, String dose1Id, String dose2Id, String dose3Id, String vacc_address) {
         this.certificateNo = certificateNo;
         this.citizenId = citizenId;
         this.dose1Id = dose1Id;
@@ -48,27 +48,27 @@ public class Vaccine {
         this.citizenId = citizenId;
     }
 
-    public int getDose1Id() {
+    public String getDose1Id() {
         return dose1Id;
     }
 
-    public void setDose1Id(int dose1Id) {
+    public void setDose1Id(String dose1Id) {
         this.dose1Id = dose1Id;
     }
 
-    public int getDose2Id() {
+    public String getDose2Id() {
         return dose2Id;
     }
 
-    public void setDose2Id(int dose2Id) {
+    public void setDose2Id(String dose2Id) {
         this.dose2Id = dose2Id;
     }
 
-    public int getDose3Id() {
+    public String getDose3Id() {
         return dose3Id;
     }
 
-    public void setDose3Id(int dose3Id) {
+    public void setDose3Id(String dose3Id) {
         this.dose3Id = dose3Id;
     }
 
