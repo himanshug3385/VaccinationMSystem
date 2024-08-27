@@ -4,7 +4,7 @@ package com.wu.vaccine.VaccinationMSystem.entity;
 import java.util.Date;
 
 public class Citizen {
-    private int citizenId;
+    private String citizenId;
     private String name;
     private String gender;
     private String addhar_no;
@@ -13,7 +13,7 @@ public class Citizen {
     private String vaccination_status;
     private int age;
 
-    public Citizen(int citizenId, String name, String gender, String addhar_no, String contact, Date last_vaccinated, String vaccination_status, int age) {
+    public Citizen(String citizenId, String name, String gender, String addhar_no, String contact, Date last_vaccinated, String vaccination_status, int age) {
         this.citizenId = citizenId;
         this.name = name;
         this.gender = gender;
@@ -27,11 +27,11 @@ public class Citizen {
     public Citizen() {
     }
 
-    public int getCitizenId() {
+    public String getCitizenId() {
         return citizenId;
     }
 
-    public void setCitizenId(int citizenId) {
+    public void setCitizenId(String citizenId) {
         this.citizenId = citizenId;
     }
 
