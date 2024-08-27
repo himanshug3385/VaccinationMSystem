@@ -22,22 +22,22 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Override
     public Citizen registerCitizen(Citizen citizen) {
         Citizen res=  entityManager.merge(citizen);
-
         return res;
     }
-    // get the citizen details by providing the citizen ID
+   //  get the citizen details by providing the citizen ID
     @Override
     public Citizen getCitizenDetailsById(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer where id=:theid",Citizen.class);
+        Query theQuery= ss.createQuery("From Citizen where citizenId=:theid",Citizen.class);
         theQuery.setParameter("theid",citizenId);
         return (Citizen) theQuery.getSingleResult();
     }
     // get the List of All citizens who have registered for vaccination or have taken any Dose
+   @Transactional
     @Override
     public List<Citizen> getAllCitizenDetails() {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer",Citizen.class);
+        Query theQuery= ss.createQuery("from Citizen",Citizen.class);
         List<Citizen> res= theQuery.getResultList();
         return res;
     }
@@ -47,27 +47,27 @@ public class CitizenDAOImpl implements CitizenDAO{
         Citizen res=  entityManager.merge(citizen);
         return res;
     }
-    // delete citizen Details - insuring he/she has taken two dose atleast
+//    // delete citizen Details - insuring he/she has taken two dose atleast
     @Override
     public void deleteCitizenDetails(Citizen citizen) {
         entityManager.remove(citizen);
         return;
     }
-    // Get the vaccination status of a citizen by its citizenId
+//    // Get the vaccination status of a citizen by its citizenId
     @Override
     public String getCitizenDetailsByStatus(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer where id=:theid",Citizen.class);
-        theQuery.setParameter("theid",citizenId);
+        Query theQuery= ss.createQuery("From Citizen where citizenId=:x",Citizen.class);
+        theQuery.setParameter("x",citizenId);
         Citizen res= (Citizen) theQuery.getSingleResult();
         return res.getVaccination_status();
     }
-     // Get list of all citizen details by vaccination status
+//     // Get list of all citizen details by vaccination status
     @Override
     public List<Citizen> getAllCitizenDetailsByStatus(String status) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer where vaccination_status=:theid",Citizen.class);
-        theQuery.setParameter("theid",status);
+        Query theQuery= ss.createQuery("From Citizen where vaccination_status=:x",Citizen.class);
+        theQuery.setParameter("x",status);
         List<Citizen>res= theQuery.getResultList();
         return res;
 

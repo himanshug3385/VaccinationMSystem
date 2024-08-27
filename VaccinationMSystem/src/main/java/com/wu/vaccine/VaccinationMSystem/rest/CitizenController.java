@@ -5,6 +5,7 @@ import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
 import java.util.List;
 
 import com.wu.vaccine.VaccinationMSystem.DAO.CitizenDAO;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class CitizenController {
     private CitizenDAO cDao;
@@ -24,19 +25,19 @@ public class CitizenController {
     }
 
 
-    @GetMapping("citizen")
+    @GetMapping("/citizen")
     public List<Citizen> getCitizens(){
         return cDao.getAllCitizenDetails();
     }
 
-    @GetMapping("citizen/{citizenId}")
-    public Citizen getCitizenDetailsById(@PathVariable String citizenId) {
-        Citizen citi = cDao.getCitizenDetailsById(citizenId);
-        return citi;
+    @GetMapping("/citizen/{citizenId}")
+    public Citizen fun2(@PathVariable String citizenId) {
+       return cDao.getCitizenDetailsById(citizenId);
     }
 
-    @PostMapping("/addcitizen")
+    @PostMapping("/registercitizen")
     public Citizen addcitizen(@RequestBody Citizen thecitizen) {
+       // Date d=
         thecitizen.setCitizenId("0");
         cDao.registerCitizen(thecitizen);
         return thecitizen;
@@ -44,9 +45,8 @@ public class CitizenController {
 
     @PutMapping("/citizen")
     public Citizen updateCustomer(@RequestBody Citizen theciti) {
+        return cDao.upDateCitizenDetails(theciti);
 
-        cDao.registerCitizen(theciti);
-        return theciti;
     }
 
     @DeleteMapping("/citizen/{citizenId}")
@@ -56,13 +56,13 @@ public class CitizenController {
         return "citizen details deleted";
     }
 
-    @GetMapping("/citizen/{citizenId}")
+    @GetMapping("/citizen/status/{citizenId}")
     public String getStatusbyId(@PathVariable String citizenId){
         return  cDao.getCitizenDetailsByStatus(citizenId);
     }
 
-    @GetMapping("/citizen/{status}")
-    public List<Citizen> getCitizenbyStatus(@PathVariable String status){
+    @GetMapping("/citizens/status/{status}")
+    public List<Citizen> fun4(@PathVariable String status){
         List<Citizen> citi=cDao.getAllCitizenDetailsByStatus(status);
         return citi;
     }
