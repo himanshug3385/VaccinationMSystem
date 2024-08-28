@@ -6,6 +6,8 @@ import com.wu.vaccine.VaccinationMSystem.entity.Dose;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class DoseController {
@@ -15,7 +17,7 @@ public class DoseController {
     }
 
     @GetMapping("/dose/{citizenId}")
-    public Dose DoseDetailsByCitizenId(@PathVariable String citizenId){
+    public List<Dose> DoseDetailsByCitizenId(@PathVariable String citizenId){
         return doseDAO.getDoseDetailsByCitizenId(citizenId);
     }
 
@@ -29,4 +31,5 @@ public class DoseController {
         doseDAO.deleteDoseByDoseId(doseId);
         return "dose details are deleted";
     }
+
 }

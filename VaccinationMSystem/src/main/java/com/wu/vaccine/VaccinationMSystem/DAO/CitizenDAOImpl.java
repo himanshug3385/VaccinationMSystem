@@ -28,7 +28,6 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Transactional
     @Override
     public Citizen registerCitizen(Citizen citizen) {
-
         Citizen res=  entityManager.merge(citizen);
         LocalDate currentDate = LocalDate.now();
         entityManager.merge(new Vaccine(citizen.getCitizenId(),citizen.getCitizenId(),citizen.getCitizenId()+"A","NA","NA","pune"));
@@ -58,13 +57,7 @@ public class CitizenDAOImpl implements CitizenDAO{
 //    // delete citizen Details - insuring he/she has taken two dose atleast
     @Override
     public void deleteCitizenDetails(Citizen citizen) {
-        Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Citizen where citizenId=:x",Citizen.class);
-        theQuery.setParameter("x",citizen.getCitizenId());
-        Citizen res= (Citizen) theQuery.getSingleResult();
-
         entityManager.remove(citizen);
-        return;
     }
 //    // Get the vaccination status of a citizen by its citizenId
     @Override

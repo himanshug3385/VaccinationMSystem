@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface DoseDAO {
     Dose getDoseDetailsByDoseId(String doesId);
-    Dose getDoseDetailsByCitizenId(String citizenId);
+    List<Dose> getDoseDetailsByCitizenId(String citizenId);
     void deleteDoseByDoseId(String doseId);
-    List<Dose> getDoseDetails(String citizenId);
-    Citizen getCitizenDetailsByCitizenId(String citizenId);
+
+
 }

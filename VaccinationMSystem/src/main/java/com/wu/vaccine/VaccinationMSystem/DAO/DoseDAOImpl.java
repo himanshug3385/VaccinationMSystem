@@ -36,18 +36,18 @@ public class DoseDAOImpl implements DoseDAO{
     }
 
     @Override
-    public Dose getDoseDetailsByCitizenId(String citizenId) {
+    public List<Dose> getDoseDetailsByCitizenId(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("From Dose where citizenId=:theId", Vaccine.class);
         theQuery.setParameter("theId",citizenId);
-        Dose res= (Dose)theQuery.getSingleResult();
+        List<Dose> res= theQuery.getResultList();
         return res;
     }
 
     @Override
     public void deleteDoseByDoseId(String doseId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery = ss.createQuery(" DELETE From Dose where DoseId=:theId", Vaccine.class);
+        Query theQuery = ss.createQuery(" DELETE From Dose where doseId=:theId", Vaccine.class);
         theQuery.setParameter("theId",doseId);
         int result = theQuery.executeUpdate();
         if (result > 0) {
@@ -57,19 +57,7 @@ public class DoseDAOImpl implements DoseDAO{
         }
     }
 
-    @Override
-    public List<Dose> getDoseDetails(String citizenId) {
-        Session ss= entityManager.unwrap(Session.class);
-        Query theQuery = ss.createQuery("From Dose where citizenId=:theId", Dose.class);
-        theQuery.setParameter("theId",citizenId);
-        List<Dose> res = theQuery.getResultList();
-        return res;
-    }
 
-    @Override
-    public Citizen getCitizenDetailsByCitizenId(String citizenId) {
-        return null;
-    }
 }
 
 

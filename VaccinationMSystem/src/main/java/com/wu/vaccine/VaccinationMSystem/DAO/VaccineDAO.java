@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface VaccineDAO {
     List<Vaccine>getAllVaccineDetails();
+    void updateVaccineDetails(String citizenId);
     String getCertificateIdById(String citizenId);
     Vaccine getVaccineDetailsByID(String citizenId);
 
