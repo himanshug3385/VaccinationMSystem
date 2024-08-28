@@ -7,8 +7,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +28,11 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Override
     public Citizen registerCitizen(Citizen citizen) {
         Citizen res=  entityManager.merge(citizen);
-        entityManager.merge(new Vaccine("cjdf","0010","001A","001B","001C","pune"));
-        entityManager.merge(new Dose("34","ddf","244","covish","01A"));
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDate.format(formatter);
+        entityManager.merge(new Vaccine(citizen.getCitizenId()+formattedDate,citizen.getCitizenId(),citizen.getCitizenId()+"A","NA","NA","pune"));
+        entityManager.merge(new Dose(citizen.getCitizenId(),"ddf", formattedDate,"covish","01A"));
         return res;
     }
     

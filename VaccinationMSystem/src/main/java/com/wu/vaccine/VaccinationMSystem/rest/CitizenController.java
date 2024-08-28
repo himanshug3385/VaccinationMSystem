@@ -41,7 +41,7 @@ public class CitizenController {
 
     @PostMapping("/registercitizen")
     public Citizen addcitizen(@RequestBody Citizen thecitizen) {
-       // Date d=
+
         thecitizen.setCitizenId("0");
         cDao.registerCitizen(thecitizen);
         return thecitizen;
