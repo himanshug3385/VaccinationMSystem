@@ -48,6 +48,10 @@ Vaccinated_By VARCHAR(20),
 Dose_Date VARCHAR(30)
 );</code></pre>
 
+<h2>Insertion Example - </h2>
+<h4>INSERT INTO Citizen (Citizen_ID, Name, Gender, Age, Contact, Aadhar, Vaccination_Status, Last_Vaccinated)
+VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully', TO_DATE('2008-11-11', 'YYYY-MM-DD'));</h4>
+
 <h2 id="apis">APIs</h2>
 
 <h3 id="citizen-apis">Citizen APIs</h3>
