@@ -47,11 +47,7 @@ public class CitizenController {
         return thecitizen;
     }
 
-    @PutMapping("/citizen")
-    public Citizen updateCustomer(@RequestBody Citizen theciti) {
-        return cDao.upDateCitizenDetails(theciti);
 
-    }
 
     @DeleteMapping("/citizen/{citizenId}")
     public String deleterCustomer(@PathVariable String citizenId) {
