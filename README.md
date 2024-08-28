@@ -6,7 +6,7 @@ CREATE TABLE Citizen (
     Contact VARCHAR(15),                         
     Aadhar VARCHAR(12) UNIQUE,                   
     Vaccination_Status VARCHAR(30),               
-    Last_Vaccinated DATE                        
+    Last_Vaccinated VARCHAR(30)                        
 );
 
 
@@ -25,5 +25,5 @@ Citizen_ID varchar(12),
 Dose_ID varchar(12), 
 Dose_Name varchar(20),
 Vaccinated_By varchar(20),
-Dose_Date DATE
+Dose_Date VARCHAR(30)
 );
