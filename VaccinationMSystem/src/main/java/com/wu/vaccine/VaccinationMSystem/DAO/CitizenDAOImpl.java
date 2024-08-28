@@ -27,12 +27,15 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Transactional
     @Override
     public Citizen registerCitizen(Citizen citizen) {
+        if(checkIfCitizenExist(citizen.getAddhar_no())){
+            //throw an exception citizen already exist.
+        }
         Citizen res=  entityManager.merge(citizen);
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = currentDate.format(formatter);
         entityManager.merge(new Vaccine(citizen.getCitizenId()+formattedDate,citizen.getCitizenId(),citizen.getCitizenId()+"A","NA","NA","pune"));
-        entityManager.merge(new Dose(citizen.getCitizenId(),"ddf", formattedDate,"covish","01A"));
+        entityManager.merge(new Dose(citizen.getCitizenId(),"Shubhangi Kumari", formattedDate,"Covishield",citizen.getCitizenId()+"A"));
         return res;
     }
     
@@ -53,15 +56,12 @@ public class CitizenDAOImpl implements CitizenDAO{
         List<Citizen> res= theQuery.getResultList();
         return res;
     }
-    // Updating the citizen vaccincation details while taking second or third dose
-    @Override
-    public Citizen upDateCitizenDetails(Citizen citizen) {
-        Citizen res=  entityManager.merge(citizen);
-        return res;
-    }
+    // Updating the citizen vaccincation details while
+
 //    // delete citizen Details - insuring he/she has taken two dose atleast
     @Override
     public void deleteCitizenDetails(Citizen citizen) {
+
         entityManager.remove(citizen);
         return;
     }
@@ -82,6 +82,16 @@ public class CitizenDAOImpl implements CitizenDAO{
         theQuery.setParameter("x",status);
         List<Citizen>res= theQuery.getResultList();
         return res;
+
+    }
+
+    @Override
+    public boolean checkIfCitizenExist(String aadhar) {
+        Session ss= entityManager.unwrap(Session.class);
+        Query theQuery= ss.createQuery("From Citizen where addhar_no=:x",Citizen.class);
+        theQuery.setParameter("x",aadhar);
+        Citizen res= (Citizen) theQuery.getSingleResult();
+        return res!=null;
 
     }
 }

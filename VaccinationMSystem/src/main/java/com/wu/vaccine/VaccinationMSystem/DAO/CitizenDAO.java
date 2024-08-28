@@ -8,8 +8,8 @@ public interface CitizenDAO {
     Citizen registerCitizen(Citizen citizen);
     Citizen getCitizenDetailsById(String citizenId);
     List<Citizen> getAllCitizenDetails();
-    Citizen upDateCitizenDetails(Citizen citizen);
     void deleteCitizenDetails(Citizen citizen);
     String getCitizenDetailsByStatus(String citizenId);
     List<Citizen> getAllCitizenDetailsByStatus(String status);
+    boolean checkIfCitizenExist(String aadhar);
 }

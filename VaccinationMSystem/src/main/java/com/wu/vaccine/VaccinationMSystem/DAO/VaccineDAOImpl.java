@@ -21,29 +21,30 @@ public class VaccineDAOImpl implements VaccineDAO{
         List<Vaccine> res= theQuery.getResultList();
         return res;
     }
-    
+
 
     @Override
     public String getCertificateIdById(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer",Vaccine.class);
+        Query theQuery= ss.createQuery("From Vaccine",Vaccine.class);
         Vaccine res= (Vaccine) theQuery.getSingleResult();
         return res.getCertificateNo();
     }
 
-    @Override
-    public List<Dose> getDoseDetails(String citizenId) {
-        Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer",Vaccine.class);
-       List<Dose> res = List.of();
-       return res;
-    }
+//    @Override
+//    public List<Dose> getDoseDetails(String citizenId) {
+//        Session ss= entityManager.unwrap(Session.class);
+//        Query theQuery= ss.createQuery("From Customer",Vaccine.class);
+//       List<Dose> res = List.of();
+//       return res;
+//    }
 
     @Override
     public Vaccine getVaccineDetailsByID(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Customer where id=:theid",Citizen.class);
+        Query theQuery= ss.createQuery("From Vaccine where citizenId=:theid",Citizen.class);
         theQuery.setParameter("theid",citizenId);
         return (Vaccine) theQuery.getSingleResult();
     }
 }
+

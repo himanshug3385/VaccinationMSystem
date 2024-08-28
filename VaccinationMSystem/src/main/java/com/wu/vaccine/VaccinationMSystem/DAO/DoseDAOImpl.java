@@ -35,7 +35,20 @@ public class DoseDAOImpl implements DoseDAO{
 
     @Override
     public void deleteDoseByDoseId(String doseId) {
+        Session ss= entityManager.unwrap(Session.class);
+        Query theQuery = ss.createQuery(" DELETE From Dose where DoseId:theId", Vaccine.class);
+        theQuery.setParameter("theId",doseId);
+        int result = theQuery.executeUpdate();
+        if (result > 0) {
+            System.out.println("Dose with doseId " + doseId + " deleted successfully.");
+        } else {
+            System.out.println("No Dose record found with doseId: " + doseId);
+        }
+    }
 
+    @Override
+    public List<Dose> getDoseDetails(String citizenId) {
+        return List.of();
     }
 
     @Override
