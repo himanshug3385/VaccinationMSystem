@@ -14,7 +14,6 @@ CREATE TABLE Citizen (
 CREATE TABLE Vaccine (
 Certificate_No varchar(15),
 Citizen_ID varchar(12), 
-FOREIGN KEY (Citizen_ID) REFERENCES Citizen (Citizen_ID),
 Dose1_ID varchar(12),
 Dose2_ID varchar(12),
 Dose3_ID varchar(12),
@@ -23,7 +22,6 @@ Vaccination_Address varchar(20)
 
 CREATE TABLE Dose (
 Citizen_ID varchar(12),
-FOREIGN KEY (Citizen_ID) REFERENCES Citizen (Citizen_ID),
 Dose_ID varchar(12), 
 Dose_Name varchar(20),
 Vaccinated_By varchar(20),
