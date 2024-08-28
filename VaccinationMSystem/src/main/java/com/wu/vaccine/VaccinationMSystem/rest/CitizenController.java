@@ -2,6 +2,7 @@ package com.wu.vaccine.VaccinationMSystem.rest;
 
 
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
+import com.wu.vaccine.VaccinationMSystem.exception.CitizenNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,7 +33,10 @@ public class CitizenController {
 
     @GetMapping("/citizen/{citizenId}")
     public Citizen fun2(@PathVariable String citizenId) {
-       return cDao.getCitizenDetailsById(citizenId);
+       Citizen citizen= cDao.getCitizenDetailsById(citizenId);
+       if(citizen==null)
+           throw new CitizenNotFoundException("Citizen Does Not Exist !!!");
+       return citizen;
     }
 
     @PostMapping("/registercitizen")
