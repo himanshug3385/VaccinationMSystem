@@ -1,8 +1,6 @@
-
-    <h1>Vaccine Management System</h1>
-    <p>This project is a backend service for a Vaccine Management System built using Spring Boot. It manages citizen information, vaccination details, and dose records.</p>
-
-    <h2>Table of Contents</h2>
+<h1>Vaccine Management System</h1>
+<p>This project is a backend service for a Vaccine Management System built using Spring Boot. It manages citizen information, vaccination details, and dose records.</p>
+<h2>Table of Contents</h2>
     <ul>
         <li><a href="#database-schema">Database Schema</a></li>
         <li><a href="#apis">APIs</a>
