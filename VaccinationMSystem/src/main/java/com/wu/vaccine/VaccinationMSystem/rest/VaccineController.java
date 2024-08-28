@@ -39,7 +39,7 @@ public class VaccineController {
 
     }
 
-    @GetMapping("certificate/{citizenId}")
+    @GetMapping("/vaccine/certificate/{citizenId}")
 
     public String certificateById(@PathVariable String citizenId) {
         String vacc = vaccineDAO.getCertificateIdById(citizenId);

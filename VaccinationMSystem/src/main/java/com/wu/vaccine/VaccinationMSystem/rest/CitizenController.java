@@ -43,7 +43,7 @@ public class CitizenController {
        return citizen;
     }
 
-    @PostMapping("/registercitizen")
+    @PostMapping("/citizen/register")
     public Citizen addcitizen(@RequestBody Citizen thecitizen) {
         if(citizenDAO.checkIfCitizenExist(thecitizen.getAddhar_no())){
             //throw an exception citizen already exist.

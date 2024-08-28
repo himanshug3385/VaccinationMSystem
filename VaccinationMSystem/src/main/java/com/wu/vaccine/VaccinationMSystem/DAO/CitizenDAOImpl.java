@@ -84,8 +84,16 @@ public class CitizenDAOImpl implements CitizenDAO{
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("From Citizen where addhar_no=:x",Citizen.class);
         theQuery.setParameter("x",aadhar);
-        Citizen res= (Citizen) theQuery.getSingleResult();
-        return res!=null;
+        Citizen res=null;
+        try{
+            res= (Citizen) theQuery.getSingleResult();
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+
+        //System.out.println(res);
 
     }
     public static boolean is120DaysDifference(LocalDate date1, LocalDate date2) {
