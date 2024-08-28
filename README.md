@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaccine Management System</title>
-</head>
-<body>
+
     <h1>Vaccine Management System</h1>
     <p>This project is a backend service for a Vaccine Management System built using Spring Boot. It manages citizen information, vaccination details, and dose records.</p>
 
@@ -120,5 +113,3 @@
 
     <h2 id="license">License</h2>
     <p>Distributed under the MIT License. See <code>LICENSE</code> for more information.</p>
-</body>
-</html>
