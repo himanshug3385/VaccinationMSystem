@@ -6,9 +6,10 @@ import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class VaccineDAOImpl implements VaccineDAO{
     private final EntityManager entityManager;
     public VaccineDAOImpl(EntityManager ss) {

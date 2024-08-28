@@ -3,6 +3,8 @@ package com.wu.vaccine.VaccinationMSystem.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -20,13 +22,13 @@ public class Citizen {
     @Column(name="Contact")
     private String contact;
     @Column(name="Last_Vaccinated")
-    private Date last_vaccinated;
+    private String last_vaccinated;
     @Column(name="Vaccination_Status")
     private String vaccination_status;
     @Column(name="Age")
     private int age;
 
-    public Citizen(String citizenId, String name, String gender, String addhar_no, String contact, Date last_vaccinated, String vaccination_status, int age) {
+    public Citizen(String citizenId, String name, String gender, String addhar_no, String contact, String last_vaccinated, String vaccination_status, int age) {
         this.citizenId = citizenId;
         this.name = name;
         this.gender = gender;
@@ -64,11 +66,11 @@ public class Citizen {
         this.addhar_no = addhar_no;
     }
 
-    public Date getLast_vaccinated() {
+    public String getLast_vaccinated() {
         return last_vaccinated;
     }
 
-    public void setLast_vaccinated(Date last_vaccinated) {
+    public void setLast_vaccinated(String last_vaccinated) {
         this.last_vaccinated = last_vaccinated;
     }
 

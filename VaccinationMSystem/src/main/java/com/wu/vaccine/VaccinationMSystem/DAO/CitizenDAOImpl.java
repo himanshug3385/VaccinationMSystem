@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +31,8 @@ public class CitizenDAOImpl implements CitizenDAO{
 
         Citizen res=  entityManager.merge(citizen);
         LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = currentDate.format(formatter);
-        entityManager.merge(new Vaccine(citizen.getCitizenId()+formattedDate,citizen.getCitizenId(),citizen.getCitizenId()+"A","NA","NA","pune"));
-        entityManager.merge(new Dose(citizen.getCitizenId(),"Shubhangi Kumari", formattedDate,"Covishield",citizen.getCitizenId()+"A"));
+        entityManager.merge(new Vaccine(citizen.getCitizenId(),citizen.getCitizenId(),citizen.getCitizenId()+"A","NA","NA","pune"));
+        entityManager.merge(new Dose(citizen.getCitizenId(),"Shubhangi Kumari",currentDate.toString() ,"Covishield",citizen.getCitizenId()+"A"));
         return res;
     }
     
@@ -95,5 +94,9 @@ public class CitizenDAOImpl implements CitizenDAO{
         Citizen res= (Citizen) theQuery.getSingleResult();
         return res!=null;
 
+    }
+    public static boolean is120DaysDifference(LocalDate date1, LocalDate date2) {
+        long daysBetween = ChronoUnit.DAYS.between(date1, date2);
+        return Math.abs(daysBetween) == 120;
     }
 }

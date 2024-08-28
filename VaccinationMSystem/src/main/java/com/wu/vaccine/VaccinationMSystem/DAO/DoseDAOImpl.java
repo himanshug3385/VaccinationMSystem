@@ -15,9 +15,11 @@ import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DoseDAOImpl implements DoseDAO{
     private final EntityManager entityManager;
     public DoseDAOImpl(EntityManager theEntityManager){

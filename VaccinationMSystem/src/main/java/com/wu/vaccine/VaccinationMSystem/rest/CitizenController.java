@@ -6,6 +6,8 @@ import com.wu.vaccine.VaccinationMSystem.exception.CitizenNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.wu.vaccine.VaccinationMSystem.DAO.CitizenDAOImpl.is120DaysDifference;
 
 @RestController
 @RequestMapping("/api")
@@ -45,7 +49,9 @@ public class CitizenController {
             //throw an exception citizen already exist.
             
         }
-        thecitizen.setCitizenId("0");
+        LocalDate currentDate = LocalDate.now();
+        thecitizen.setLast_vaccinated(currentDate.toString());
+        thecitizen.setCitizenId(thecitizen.getAddhar_no());
         citizenDAO.registerCitizen(thecitizen);
         return thecitizen;
     }
@@ -55,6 +61,10 @@ public class CitizenController {
     @DeleteMapping("/citizen/{citizenId}")
     public String deleterCustomer(@PathVariable String citizenId) {
         Citizen citi=citizenDAO.getCitizenDetailsById(citizenId);
+        LocalDate current= LocalDate.now();
+        if(is120DaysDifference(current,LocalDate.parse(citi.getLast_vaccinated())))
+            //  throw exception
+
         citizenDAO.deleteCitizenDetails(citi);
         return "citizen details deleted";
     }
