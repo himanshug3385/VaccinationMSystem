@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-
+@RestController
 @RequestMapping("/api")
 
 public class VaccineController {
@@ -46,7 +45,10 @@ public class VaccineController {
         return vacc;
 
     }
-
+    @PutMapping("/vaccine/{citizenId}")
+    public void takeDose(@PathVariable String citizenId){
+        vaccineDAO.updateVaccineDetails(citizenId);
+    }
     @GetMapping("/vaccine/{citizenId}")
 
     public Vaccine vaccineDetailsById(@PathVariable String citizenId) {

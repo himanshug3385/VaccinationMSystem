@@ -1,37 +1,49 @@
 package com.wu.vaccine.VaccinationMSystem.service;
 
+import com.wu.vaccine.VaccinationMSystem.DAO.CitizenDAO;
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class CitizenServiceImpl implements CitizenService{
+@Service
+public class CitizenServiceImpl implements CitizenService {
+    private CitizenDAO citizenDAO;
+    public CitizenServiceImpl(CitizenDAO thecitizenDAO){
+        this.citizenDAO=thecitizenDAO;
+    }
     @Override
     public Citizen registerCitizen(Citizen citizen) {
-        return null;
+        return citizenDAO.registerCitizen(citizen);
     }
 
     @Override
-    public Citizen getCitizenDetailsById(int citizenId) {
-        return null;
+    public Citizen getCitizenDetailsById(String citizenId) {
+        return citizenDAO.getCitizenDetailsById(citizenId);
     }
 
     @Override
     public List<Citizen> getAllCitizenDetails() {
-        return List.of();
-    }
-
-    @Override
-    public Citizen upDateCitizenDetails(Citizen citizen) {
-        return null;
+        return citizenDAO.getAllCitizenDetails();
     }
 
     @Override
     public void deleteCitizenDetails(Citizen citizen) {
-
+        citizenDAO.deleteCitizenDetails(citizen);
     }
 
     @Override
-    public List<Citizen> getCitizenDetailsByStatus(String status) {
-        return List.of();
+    public String getCitizenDetailsByStatus(String citizenId) {
+        return citizenDAO.getCitizenDetailsByStatus(citizenId);
+    }
+
+    @Override
+    public List<Citizen> getAllCitizenDetailsByStatus(String status) {
+        return citizenDAO.getAllCitizenDetailsByStatus(status);
+    }
+
+    @Override
+    public boolean checkIfCitizenExist(String aadhar) {
+        return citizenDAO.checkIfCitizenExist(aadhar);
     }
 }

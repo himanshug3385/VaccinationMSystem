@@ -5,6 +5,7 @@ import com.wu.vaccine.VaccinationMSystem.entity.Dose;
 import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -30,8 +31,13 @@ public class DoseDAOImpl implements DoseDAO{
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("From Dose where doseId=:theId", Vaccine.class);
         theQuery.setParameter("theId",doseId);
-        Dose res= (Dose)theQuery.getSingleResult();
-        return res;
+        try{
+            Dose res= (Dose)theQuery.getSingleResult();
+            return res;
+        }catch(Exception e){
+            return null;
+        }
+
 
     }
 
@@ -40,10 +46,15 @@ public class DoseDAOImpl implements DoseDAO{
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("From Dose where citizenId=:theId", Vaccine.class);
         theQuery.setParameter("theId",citizenId);
-        List<Dose> res= theQuery.getResultList();
-        return res;
-    }
+        try{
+            List<Dose> res= theQuery.getResultList();
+            return res;
+        }catch(Exception e){
+            return null;
+        }
 
+    }
+    @Transactional
     @Override
     public void deleteDoseByDoseId(String doseId) {
         Session ss= entityManager.unwrap(Session.class);

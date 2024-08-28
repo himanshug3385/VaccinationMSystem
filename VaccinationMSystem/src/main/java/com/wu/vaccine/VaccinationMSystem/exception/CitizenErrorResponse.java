@@ -3,15 +3,14 @@ package com.wu.vaccine.VaccinationMSystem.exception;
 public class CitizenErrorResponse {
     private int status;
     private String message;
-    private long timstamp;
+    private long timestamp;
 
-    public CitizenErrorResponse() {
-    }
 
-    public CitizenErrorResponse(int status, String message, long timstamp) {
+    public CitizenErrorResponse(int status, String message, long timestamp) {
+         super();
         this.status = status;
         this.message = message;
-        this.timstamp = timstamp;
+        this.timestamp = timestamp;
     }
 
     public int getStatus() {
@@ -31,10 +30,10 @@ public class CitizenErrorResponse {
     }
 
     public long getTimstamp() {
-        return timstamp;
+        return timestamp;
     }
 
     public void setTimstamp(long timstamp) {
-        this.timstamp = timstamp;
+        this.timestamp = timstamp;
     }
 }

@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface CitizenService {
     Citizen registerCitizen(Citizen citizen);
-    Citizen getCitizenDetailsById(int citizenId);
+    Citizen getCitizenDetailsById(String citizenId);
     List<Citizen> getAllCitizenDetails();
-    Citizen upDateCitizenDetails(Citizen citizen);
     void deleteCitizenDetails(Citizen citizen);
-    List<Citizen> getCitizenDetailsByStatus(String status);
+    String getCitizenDetailsByStatus(String citizenId);
+    List<Citizen> getAllCitizenDetailsByStatus(String status);
+    boolean checkIfCitizenExist(String aadhar);
 }

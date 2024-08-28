@@ -3,6 +3,7 @@ package com.wu.vaccine.VaccinationMSystem.DAO;
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
 import com.wu.vaccine.VaccinationMSystem.entity.Dose;
 import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
+import com.wu.vaccine.VaccinationMSystem.exception.CitizenNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
@@ -39,25 +40,47 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Override
     public Citizen getCitizenDetailsById(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Citizen where citizenId=:theid",Citizen.class);
-        theQuery.setParameter("theid",citizenId);
-        return (Citizen) theQuery.getSingleResult();
+
+            Query theQuery= ss.createQuery("From Citizen where citizenId=:theid",Citizen.class);
+            theQuery.setParameter("theid",citizenId);
+            Citizen cz = (Citizen) theQuery.getSingleResult();
+
+            return cz ;
+
+
     }
     // get the List of All citizens who have registered for vaccination or have taken any Dose
-   @Transactional
+
     @Override
     public List<Citizen> getAllCitizenDetails() {
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("from Citizen",Citizen.class);
-        List<Citizen> res= theQuery.getResultList();
-        return res;
+        try{
+            List<Citizen> res= theQuery.getResultList();
+            return res;
+        }catch(Exception e){
+            return null;
+        }
+
     }
     // Updating the citizen vaccincation details while
 
 //    // delete citizen Details - insuring he/she has taken two dose atleast
+    @Transactional
     @Override
     public void deleteCitizenDetails(Citizen citizen) {
-        entityManager.remove(citizen);
+        Session ss= entityManager.unwrap(Session.class);
+        Query theQuery= ss.createQuery("From Vaccine where citizenId=:theid",Citizen.class);
+        theQuery.setParameter("theid",citizen.getCitizenId());
+        try{
+            Vaccine vacc= (Vaccine) theQuery.getSingleResult();
+            if(vacc.getDose3Id().equals("NA"))
+                //throw error
+                entityManager.remove(citizen);
+        }catch(Exception e){
+            return ;
+        }
+
     }
 //    // Get the vaccination status of a citizen by its citizenId
     @Override
@@ -65,8 +88,13 @@ public class CitizenDAOImpl implements CitizenDAO{
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("From Citizen where citizenId=:x",Citizen.class);
         theQuery.setParameter("x",citizenId);
-        Citizen res= (Citizen) theQuery.getSingleResult();
-        return res.getVaccination_status();
+        try{
+            Citizen res= (Citizen) theQuery.getSingleResult();
+            return res.getVaccination_status();
+        }catch(Exception e){
+            return null;
+        }
+
     }
 //     // Get list of all citizen details by vaccination status
     @Override
@@ -74,8 +102,13 @@ public class CitizenDAOImpl implements CitizenDAO{
         Session ss= entityManager.unwrap(Session.class);
         Query theQuery= ss.createQuery("From Citizen where vaccination_status=:x",Citizen.class);
         theQuery.setParameter("x",status);
-        List<Citizen>res= theQuery.getResultList();
-        return res;
+        try{
+            List<Citizen>res= theQuery.getResultList();
+            return res;
+        }catch(Exception e){
+            return null;
+        }
+
 
     }
 
@@ -98,6 +131,6 @@ public class CitizenDAOImpl implements CitizenDAO{
     }
     public static boolean is120DaysDifference(LocalDate date1, LocalDate date2) {
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
-        return Math.abs(daysBetween) == 120;
+        return Math.abs(daysBetween) >= 120;
     }
 }
