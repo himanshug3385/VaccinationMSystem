@@ -27,9 +27,7 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Transactional
     @Override
     public Citizen registerCitizen(Citizen citizen) {
-        if(checkIfCitizenExist(citizen.getAddhar_no())){
-            //throw an exception citizen already exist.
-        }
+
         Citizen res=  entityManager.merge(citizen);
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -61,6 +59,10 @@ public class CitizenDAOImpl implements CitizenDAO{
 //    // delete citizen Details - insuring he/she has taken two dose atleast
     @Override
     public void deleteCitizenDetails(Citizen citizen) {
+        Session ss= entityManager.unwrap(Session.class);
+        Query theQuery= ss.createQuery("From Citizen where citizenId=:x",Citizen.class);
+        theQuery.setParameter("x",citizen.getCitizenId());
+        Citizen res= (Citizen) theQuery.getSingleResult();
 
         entityManager.remove(citizen);
         return;

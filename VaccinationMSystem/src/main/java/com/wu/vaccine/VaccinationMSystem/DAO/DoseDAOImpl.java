@@ -9,6 +9,15 @@ import org.hibernate.Session;
 
 import java.util.List;
 
+import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
+import com.wu.vaccine.VaccinationMSystem.entity.Dose;
+import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import org.hibernate.Session;
+
+import java.util.List;
+
 public class DoseDAOImpl implements DoseDAO{
     private final EntityManager entityManager;
     public DoseDAOImpl(EntityManager theEntityManager){
@@ -17,7 +26,7 @@ public class DoseDAOImpl implements DoseDAO{
     @Override
     public Dose getDoseDetailsByDoseId(String doseId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Dose where doseId:theId", Vaccine.class);
+        Query theQuery= ss.createQuery("From Dose where doseId=:theId", Vaccine.class);
         theQuery.setParameter("theId",doseId);
         Dose res= (Dose)theQuery.getSingleResult();
         return res;
@@ -27,7 +36,7 @@ public class DoseDAOImpl implements DoseDAO{
     @Override
     public Dose getDoseDetailsByCitizenId(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery= ss.createQuery("From Dose where citizenId:theId", Vaccine.class);
+        Query theQuery= ss.createQuery("From Dose where citizenId=:theId", Vaccine.class);
         theQuery.setParameter("theId",citizenId);
         Dose res= (Dose)theQuery.getSingleResult();
         return res;
@@ -36,7 +45,7 @@ public class DoseDAOImpl implements DoseDAO{
     @Override
     public void deleteDoseByDoseId(String doseId) {
         Session ss= entityManager.unwrap(Session.class);
-        Query theQuery = ss.createQuery(" DELETE From Dose where DoseId:theId", Vaccine.class);
+        Query theQuery = ss.createQuery(" DELETE From Dose where DoseId=:theId", Vaccine.class);
         theQuery.setParameter("theId",doseId);
         int result = theQuery.executeUpdate();
         if (result > 0) {
@@ -48,7 +57,11 @@ public class DoseDAOImpl implements DoseDAO{
 
     @Override
     public List<Dose> getDoseDetails(String citizenId) {
-        return List.of();
+        Session ss= entityManager.unwrap(Session.class);
+        Query theQuery = ss.createQuery("From Dose where citizenId=:theId", Dose.class);
+        theQuery.setParameter("theId",citizenId);
+        List<Dose> res = theQuery.getResultList();
+        return res;
     }
 
     @Override
@@ -56,3 +69,6 @@ public class DoseDAOImpl implements DoseDAO{
         return null;
     }
 }
+
+
+

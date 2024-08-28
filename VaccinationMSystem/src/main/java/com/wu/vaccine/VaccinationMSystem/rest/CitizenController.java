@@ -20,20 +20,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class CitizenController {
-    private CitizenDAO cDao;
+    private CitizenDAO citizenDAO;
     public CitizenController(CitizenDAO thecitizedao) {
-        this.cDao=thecitizedao;
+        this.citizenDAO=thecitizedao;
     }
 
 
     @GetMapping("/citizen")
     public List<Citizen> getCitizens(){
-        return cDao.getAllCitizenDetails();
+        return citizenDAO.getAllCitizenDetails();
     }
 
     @GetMapping("/citizen/{citizenId}")
     public Citizen fun2(@PathVariable String citizenId) {
-       Citizen citizen= cDao.getCitizenDetailsById(citizenId);
+       Citizen citizen= citizenDAO.getCitizenDetailsById(citizenId);
        if(citizen==null)
            throw new CitizenNotFoundException("Citizen Does Not Exist !!!");
        return citizen;
@@ -41,9 +41,12 @@ public class CitizenController {
 
     @PostMapping("/registercitizen")
     public Citizen addcitizen(@RequestBody Citizen thecitizen) {
-
+        if(citizenDAO.checkIfCitizenExist(thecitizen.getAddhar_no())){
+            //throw an exception citizen already exist.
+            
+        }
         thecitizen.setCitizenId("0");
-        cDao.registerCitizen(thecitizen);
+        citizenDAO.registerCitizen(thecitizen);
         return thecitizen;
     }
 
@@ -51,19 +54,19 @@ public class CitizenController {
 
     @DeleteMapping("/citizen/{citizenId}")
     public String deleterCustomer(@PathVariable String citizenId) {
-        Citizen citi=cDao.getCitizenDetailsById(citizenId);
-        cDao.deleteCitizenDetails(citi);
+        Citizen citi=citizenDAO.getCitizenDetailsById(citizenId);
+        citizenDAO.deleteCitizenDetails(citi);
         return "citizen details deleted";
     }
 
     @GetMapping("/citizen/status/{citizenId}")
     public String getStatusbyId(@PathVariable String citizenId){
-        return  cDao.getCitizenDetailsByStatus(citizenId);
+        return  citizenDAO.getCitizenDetailsByStatus(citizenId);
     }
 
     @GetMapping("/citizens/status/{status}")
     public List<Citizen> fun4(@PathVariable String status){
-        List<Citizen> citi=cDao.getAllCitizenDetailsByStatus(status);
+        List<Citizen> citi=citizenDAO.getAllCitizenDetailsByStatus(status);
         return citi;
     }
 
