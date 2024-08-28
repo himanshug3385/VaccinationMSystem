@@ -84,15 +84,15 @@ VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully
 
 <h3>Prerequisites</h3>
 <ul>
-    <li>Java 11 or higher</li>
+    <li>Java 17 or higher</li>
     <li>Maven</li>
-    <li>MySQL</li>
+    <li>Oracle Database</li>
 </ul>
 
 <h3>Installation</h3>
 <ol>
     <li>Clone the repo
-    <pre><code>git clone https://github.com/your_username/vaccine-management-system.git</code></pre>
+    <pre><code>git clone https://github.com/himanshug3385/VaccinationMSystem.git</code></pre>
     </li>
     <li>Install Maven dependencies
         <pre><code>mvn install</code></pre>
@@ -104,7 +104,7 @@ VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully
     </ol>
 
 <h2 id="contributing">Contributing</h2>
-<p>Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are <strong>greatly appreciated</strong>.</p>
+<p>Contributions make the open-source community such an amazing place to learn, inspire, and create. I appreciate your contributions.</p>
 <ol>
     <li>Fork the Project</li>
     <li>Create your Feature Branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
