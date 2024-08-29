@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
+
+@Controller
 
 
 public class VaccineController {
@@ -36,11 +38,11 @@ public class VaccineController {
 
     @GetMapping("/")
 
-    public List<Vaccine> vaccineDetails() {
+    public String vaccineDetails(Model model) {
 
         List<Vaccine>res= vaccineDAO.getAllVaccineDetails();
-       // model.addAttribute("vaccineData",res);
-        return res;
+        model.addAttribute("vaccineData",res);
+        return "dashboard";
 
     }
 
@@ -51,17 +53,21 @@ public class VaccineController {
         return vacc;
 
     }
-    @PutMapping("/api/vaccine/{citizenId}")
-    public void takeDose(@PathVariable String citizenId){
-        vaccineDAO.updateVaccineDetails(citizenId);
+    @PostMapping("/api/vaccine/update")
+    public String takeDose(@ModelAttribute("vaccine") Vaccine vaccine){
+        vaccineDAO.updateVaccineDetails(vaccine.getCitizenId());
+        return "redirect:/";
 
     }
     @GetMapping("/api/vaccine/update/{citizenId}")
-    public String funf(@PathVariable String citizenId){
-//        Vaccine vaccine=vaccineDAO.getVaccineDetailsByID(citizenId);
-//        List<Dose> doses= doseDAO.getDoseDetailsByCitizenId(citizenId);
-//        System.out.println(doses);
-        return "Details Updated";
+    public String funf(@PathVariable String citizenId,Model model){
+        Vaccine vaccine=vaccineDAO.getVaccineDetailsByID(citizenId);
+        List<Dose> doses= doseDAO.getDoseDetailsByCitizenId(citizenId);
+        model.addAttribute("vaccines",vaccine);
+        model.addAttribute("doses",doses);
+
+        System.out.println(doses);
+        return "TakeDose";
     }
     @GetMapping("/api/vaccine/{citizenId}")
     public Vaccine vaccineDetailsById(@PathVariable String citizenId) {

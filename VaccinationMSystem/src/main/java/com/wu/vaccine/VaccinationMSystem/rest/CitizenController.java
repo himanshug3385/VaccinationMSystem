@@ -2,9 +2,6 @@ package com.wu.vaccine.VaccinationMSystem.rest;
 
 
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
-import com.wu.vaccine.VaccinationMSystem.exception.CitizenAlreadyExistException;
-import com.wu.vaccine.VaccinationMSystem.exception.CitizenNotFoundException;
-import com.wu.vaccine.VaccinationMSystem.exception.DeleteNotAllowedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,59 +21,56 @@ import java.util.List;
 
 import static com.wu.vaccine.VaccinationMSystem.DAO.CitizenDAOImpl.is120DaysDifference;
 
-@RestController
+
+@Controller
 @RequestMapping("/api")
 public class CitizenController {
     private CitizenDAO citizenDAO;
     public CitizenController(CitizenDAO thecitizedao) {
-        this.citizenDAO=thecitizedao;
+        this.citizenDAO = thecitizedao;
     }
-
-
+    //
     @GetMapping("/citizen")
-    public List<Citizen> getCitizens(Model theModel){
-        List<Citizen> res= citizenDAO.getAllCitizenDetails();
-        //theModel.addAttribute("citizens",res);
-        return res;
+    public String getCitizens(Model theModel) {
+        List<Citizen> res = citizenDAO.getAllCitizenDetails();
+        theModel.addAttribute("citizens",res);
+        return "citizen";
     }
 
     @GetMapping("/citizen/{citizenId}")
-    public Citizen fun2(@PathVariable String citizenId) {
-       Citizen citizen= citizenDAO.getCitizenDetailsById(citizenId);
-       if(citizen==null)
-           throw new CitizenNotFoundException("Citizen Does Not Exist !!!");
-       return citizen;
+    public String fun2(@PathVariable String citizenId) {
+        Citizen citizen = citizenDAO.getCitizenDetailsById(citizenId);
+        return "redirect:/";
     }
-    @GetMapping("/citizen/registration")
-    public String showRegistrationForm(){
+
+    @GetMapping("/citizen/registeration")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("citizen",new Citizen());
         return "register";
     }
 
+
+    //api/citizen/register
     @PostMapping("/citizen/register")
-    public Citizen addcitizen(@RequestBody Citizen thecitizen) {
-        if(citizenDAO.checkIfCitizenExist(thecitizen.getAddhar_no())){
-            //throw an exception citizen already exist.
-            throw new CitizenAlreadyExistException("Citizen Already Exist");
-        }
+    public String addcitizen(@ModelAttribute("citizen") Citizen thecitizen) {
         LocalDate currentDate = LocalDate.now();
         thecitizen.setLast_vaccinated(currentDate.toString());
         thecitizen.setCitizenId(thecitizen.getAddhar_no());
-
+        System.out.println("Hlllo world");
         citizenDAO.registerCitizen(thecitizen);
-        return thecitizen;
+        return "redirect:/";
 //        return "redirect:dashboard";
     }
 
 
-
     @DeleteMapping("/citizen/{citizenId}")
     public String deleterCustomer(@PathVariable String citizenId) {
-        Citizen citi=citizenDAO.getCitizenDetailsById(citizenId);
-        LocalDate current= LocalDate.now();
-        if(is120DaysDifference(current,LocalDate.parse(citi.getLast_vaccinated()))){
-            throw new DeleteNotAllowedException("Delete Not Allowed Due to Date Difference error");
-        }
-            //  throw exception
+        Citizen citi = citizenDAO.getCitizenDetailsById(citizenId);
+        LocalDate current = LocalDate.now();
+//        if(is120DaysDifference(current,LocalDate.parse(citi.getLast_vaccinated()))){
+//            throw new DeleteNotAllowedException("Delete Not Allowed Due to Date Difference error");
+//        }
+        //  throw exception
 
 
         citizenDAO.deleteCitizenDetails(citi);
@@ -84,16 +78,15 @@ public class CitizenController {
     }
 
     @GetMapping("/citizen/status/{citizenId}")
-    public String getStatusbyId(@PathVariable String citizenId){
-        return  citizenDAO.getCitizenDetailsByStatus(citizenId);
+    public String getStatusbyId(@PathVariable String citizenId) {
+        return citizenDAO.getCitizenDetailsByStatus(citizenId);
     }
 
     @GetMapping("/citizens/status/{status}")
-    public List<Citizen> fun4(@PathVariable String status){
-        List<Citizen> citi=citizenDAO.getAllCitizenDetailsByStatus(status);
-        return citi;
+    public String fun4(@PathVariable String status) {
+        List<Citizen> citi = citizenDAO.getAllCitizenDetailsByStatus(status);
+        return "dashboard";
     }
-
 
 
 }

@@ -48,14 +48,15 @@
 <body>
 <div id="formWrapper">
     <h1>Citizen Registration</h1>
-    <form id="registrationForm" action="#" th:action="@{/citizen/register}" method="POST">
+
+    <form id="registrationForm" action="#" th:action="@{/api/citizen/register}" th:object="${citizen}" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" class="form-control" required />
+            <input type="text" id="name" th:field="*{name}" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="gender">Gender</label>
-            <select id="gender" name="gender" class="form-control" required>
+            <select id="gender" th:field="*{gender}" class="form-control" required>
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -64,18 +65,18 @@
         </div>
         <div class="form-group">
             <label for="aadhar_no">Aadhar Number</label>
-            <input maxlength="12" minlength="12" type="number" id="aadhar_no" name="aadhar_no" class="form-control" required />
+            <input maxlength="12" minlength="12" type="number" id="aadhar_no" th:field="*{addhar_no}" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" class="form-control" required />
+            <input type="number" id="age" th:field="*{age}" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="contact">Contact Number</label>
-            <input maxlength="10" type="number" id="contact" name="contact" class="form-control" required />
+            <input maxlength="10" type="number" id="contact" th:field="*{contact}" class="form-control" required />
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit"  class="btn btn-success">Submit</button>
         </div>
     </form>
 </div>
@@ -83,17 +84,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
 
-        // Get form data
-        const formData = new FormData(event.target);
-        const queryParams = new URLSearchParams(formData).toString();
-
-        // Redirect to dashboard.html with form data as query parameters
-        window.location.href = `dashboard.html?${queryParams}`;
-    });
-</script>
 </body>
 </html>

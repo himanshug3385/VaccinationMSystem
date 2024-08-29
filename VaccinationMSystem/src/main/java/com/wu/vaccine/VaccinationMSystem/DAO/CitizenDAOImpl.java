@@ -3,8 +3,8 @@ package com.wu.vaccine.VaccinationMSystem.DAO;
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
 import com.wu.vaccine.VaccinationMSystem.entity.Dose;
 import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
-import com.wu.vaccine.VaccinationMSystem.exception.CitizenNotFoundException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
@@ -37,17 +37,19 @@ public class CitizenDAOImpl implements CitizenDAO{
     }
     
    //  get the citizen details by providing the citizen ID
-    @Override
-    public Citizen getCitizenDetailsById(String citizenId) {
-        Session ss= entityManager.unwrap(Session.class);
-            Query theQuery= ss.createQuery("From Citizen where citizenId=:theid",Citizen.class);
-            theQuery.setParameter("theid",citizenId);
-            Citizen cz = (Citizen) theQuery.getSingleResult();
+   @Override
+   public Citizen getCitizenDetailsById(String theid) {
+       try {
+           Citizen citizen = entityManager.createQuery("FROM Citizen WHERE citizenId = :theid", Citizen.class)
+                   .setParameter("theid", theid)
+                   .getSingleResult();
+           return citizen;
+       } catch (NoResultException e) {
+           System.out.println("No citizen found with ID: " + theid);
+           return null;
+       }
+   }
 
-            return cz ;
-
-
-    }
     // get the List of All citizens who have registered for vaccination or have taken any Dose
 
     @Override
