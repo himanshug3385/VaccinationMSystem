@@ -14,6 +14,29 @@
         <li><a href="#contributing">Contributing</a></li>
         <li><a href="#license">License</a></li>
     </ul>
+    
+### Functionalities
+
+1. **Citizen Registeration**
+    - Allows you to register new citizen to the system.
+
+2. **Show Citizen and Vaccines**
+    - Displays a list of citizens along with their vaccination details.
+
+3. **Update Status**
+    - Automatically updates a citizen's vaccination status to "fully" or "Partially" or "Boosted" if they have received more than 2 doses.
+
+4. **Add Dose to Particular Citizen**
+    - Functionality to add a new dose to a specific citizen.
+
+5. **Give Dose After 120 Days**
+    - Enforces a minimum gap of 120 days between doses before administering another dose.
+
+6. **Delete Citizen**
+    - Ability to delete a citizen from the system.
+
+7. **Same Dose Equality Check**
+    - Ensures that the vaccine dose type administered is the same as the previous dose type.
 
 <h2 id="database-schema">Database Schema</h2>
 
@@ -48,6 +71,10 @@ Vaccinated_By VARCHAR(20),
 Dose_Date VARCHAR(30)
 );</code></pre>
 
+<h2>Insertion Example - </h2>
+<h4>INSERT INTO Citizen (Citizen_ID, Name, Gender, Age, Contact, Aadhar, Vaccination_Status, Last_Vaccinated)
+VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully', TO_DATE('2008-11-11', 'YYYY-MM-DD'));</h4>
+
 <h2 id="apis">APIs</h2>
 
 <h3 id="citizen-apis">Citizen APIs</h3>
@@ -80,15 +107,15 @@ Dose_Date VARCHAR(30)
 
 <h3>Prerequisites</h3>
 <ul>
-    <li>Java 11 or higher</li>
+    <li>Java 17 or higher</li>
     <li>Maven</li>
-    <li>MySQL</li>
+    <li>Oracle Database</li>
 </ul>
 
 <h3>Installation</h3>
 <ol>
     <li>Clone the repo
-    <pre><code>git clone https://github.com/your_username/vaccine-management-system.git</code></pre>
+    <pre><code>git clone https://github.com/himanshug3385/VaccinationMSystem.git</code></pre>
     </li>
     <li>Install Maven dependencies
         <pre><code>mvn install</code></pre>
@@ -100,7 +127,7 @@ Dose_Date VARCHAR(30)
     </ol>
 
 <h2 id="contributing">Contributing</h2>
-<p>Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are <strong>greatly appreciated</strong>.</p>
+<p>Contributions make the open-source community such an amazing place to learn, inspire, and create. I appreciate your contributions.</p>
 <ol>
     <li>Fork the Project</li>
     <li>Create your Feature Branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
