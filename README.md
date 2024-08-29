@@ -14,6 +14,28 @@
         <li><a href="#contributing">Contributing</a></li>
         <li><a href="#license">License</a></li>
     </ul>
+### Functionalities
+
+1. **Citizen Registeration**
+    - Allows you to register new citizen to the system.
+
+2. **Show Citizen and Vaccines**
+    - Displays a list of citizens along with their vaccination details.
+
+3. **Update Status**
+    - Automatically updates a citizen's vaccination status to "fully" or "Partially" or "Boosted" if they have received more than 2 doses.
+
+4. **Add Dose to Particular Citizen**
+    - Functionality to add a new dose to a specific citizen.
+
+5. **Give Dose After 120 Days**
+    - Enforces a minimum gap of 120 days between doses before administering another dose.
+
+6. **Delete Citizen**
+    - Ability to delete a citizen from the system.
+
+7. **Same Dose Equality Check**
+    - Ensures that the vaccine dose type administered is the same as the previous dose type.
 
 <h2 id="database-schema">Database Schema</h2>
 
