@@ -10,6 +10,7 @@ public interface DoseDAO {
     Dose getDoseDetailsByDoseId(String doesId);
     List<Dose> getDoseDetailsByCitizenId(String citizenId);
     void deleteDoseByDoseId(String doseId);
+    List<Dose> getDoseDetails();
 
 
 }

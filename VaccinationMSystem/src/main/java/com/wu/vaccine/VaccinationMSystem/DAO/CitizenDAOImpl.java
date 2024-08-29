@@ -40,7 +40,6 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Override
     public Citizen getCitizenDetailsById(String citizenId) {
         Session ss= entityManager.unwrap(Session.class);
-
             Query theQuery= ss.createQuery("From Citizen where citizenId=:theid",Citizen.class);
             theQuery.setParameter("theid",citizenId);
             Citizen cz = (Citizen) theQuery.getSingleResult();

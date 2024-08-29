@@ -6,6 +6,7 @@ import com.wu.vaccine.VaccinationMSystem.exception.CitizenAlreadyExistException;
 import com.wu.vaccine.VaccinationMSystem.exception.CitizenNotFoundException;
 import com.wu.vaccine.VaccinationMSystem.exception.DeleteNotAllowedException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
@@ -33,8 +34,10 @@ public class CitizenController {
 
 
     @GetMapping("/citizen")
-    public List<Citizen> getCitizens(){
-        return citizenDAO.getAllCitizenDetails();
+    public List<Citizen> getCitizens(Model theModel){
+        List<Citizen> res= citizenDAO.getAllCitizenDetails();
+        //theModel.addAttribute("citizens",res);
+        return res;
     }
 
     @GetMapping("/citizen/{citizenId}")
@@ -43,6 +46,10 @@ public class CitizenController {
        if(citizen==null)
            throw new CitizenNotFoundException("Citizen Does Not Exist !!!");
        return citizen;
+    }
+    @GetMapping("/citizen/registration")
+    public String showRegistrationForm(){
+        return "register";
     }
 
     @PostMapping("/citizen/register")
@@ -54,8 +61,10 @@ public class CitizenController {
         LocalDate currentDate = LocalDate.now();
         thecitizen.setLast_vaccinated(currentDate.toString());
         thecitizen.setCitizenId(thecitizen.getAddhar_no());
+
         citizenDAO.registerCitizen(thecitizen);
         return thecitizen;
+//        return "redirect:dashboard";
     }
 
 

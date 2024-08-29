@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccine Management System</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Vaccine Details</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Citizen ID</th>
+            <th>dose-1 Id</th>
+            <th>Dose-2 ID</th>
+            <th>Dose-3 ID</th>
+            <th>Vaccine Address</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vaccine : ${vaccines}">
+            <td th:text="${vaccine.citizenId}"></td>
+            <td th:text="${vaccine.dose1Id}"></td>
+            <td th:text="${vaccine.dose2Id}"></td>
+            <td th:text="${vaccine.dose3Id}"></td>
+            <td th:text="${vaccine.vacc_address}"></td>
+            <td>
+                <form th:action="@{/updateDose}" method="post" style="display:inline;">
+                    <input type="hidden" name="citizenId" th:value="${vaccine.citizenId}">
+                    <button type="submit">Update Dose</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Dose Details</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Dose ID</th>
+            <th>Citizen ID</th>
+            <th>Dose Name</th>
+            <th>Vaccinated By</th>
+            <th>Dose Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dose : ${doses}">
+            <td th:text="${dose.doseId}"></td>
+            <td th:text="${dose.citizenId}"></td>
+            <td th:text="${dose.doseName}"></td>
+            <td th:text="${dose.doseGivenBy}"></td>
+            <td th:text="${dose.given_date}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+has context menu

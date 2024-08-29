@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Citizen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Display Citizen</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Citizen Id</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Contact</th>
+        <th>Aadhar Number</th>
+        <th>Vaccination Status</th>
+        <th>Last Vaccinated</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="citi : ${citizens}">
+        <td th:text="${citi.citizenId}"></td>
+        <td th:text="${citi.name}"></td>
+        <td th:text="${citi.gender}"></td>
+        <td th:text="${citi.age}"></td>
+        <td th:text="${citi.contact}"></td>
+        <td th:text="${citi.addhar_no}"></td>
+        <td th:text="${citi.vaccination_status}"></td>
+        <td th:text="${citi.last_vaccinated}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -4,6 +4,7 @@ package com.wu.vaccine.VaccinationMSystem.rest;
 import com.wu.vaccine.VaccinationMSystem.DAO.DoseDAO;
 import com.wu.vaccine.VaccinationMSystem.entity.Dose;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,11 @@ public class DoseController {
     @GetMapping("/dose/{citizenId}")
     public List<Dose> DoseDetailsByCitizenId(@PathVariable String citizenId){
         return doseDAO.getDoseDetailsByCitizenId(citizenId);
+    }
+    @GetMapping("/doses")
+    public List<Dose> fdljf(){
+        List<Dose> res =doseDAO.getDoseDetails();
+        return res;
     }
 
     @GetMapping("/dose/details/{doseId}")

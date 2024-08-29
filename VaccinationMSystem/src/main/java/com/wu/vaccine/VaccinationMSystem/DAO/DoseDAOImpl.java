@@ -26,6 +26,7 @@ public class DoseDAOImpl implements DoseDAO{
     public DoseDAOImpl(EntityManager theEntityManager){
         this.entityManager=theEntityManager;
     }
+
     @Override
     public Dose getDoseDetailsByDoseId(String doseId) {
         Session ss= entityManager.unwrap(Session.class);
@@ -66,6 +67,13 @@ public class DoseDAOImpl implements DoseDAO{
         } else {
             System.out.println("No Dose record found with doseId: " + doseId);
         }
+    }
+
+    @Override
+    public List<Dose> getDoseDetails() {
+        Session ss= entityManager.unwrap(Session.class);
+        Query theQuery= ss.createQuery("From Dose ", Vaccine.class);
+        return theQuery.getResultList();
     }
 
 
