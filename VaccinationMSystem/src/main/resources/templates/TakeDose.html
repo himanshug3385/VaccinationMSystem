@@ -45,7 +45,7 @@
             <td>
                 <form th:action="@{/view/vaccine/update}" th:object="${vaccine}" method="post" style="display:inline;">
                     <input type="hidden" name="citizenId" th:value="${vaccine.citizenId}">
-                    <button type="submit">Update Dose</button>
+                    <button type="submit" onclick="return confirm('Are you sure you want to take next dose?')">Update Dose</button>
                 </form>
             </td>
         </tr>

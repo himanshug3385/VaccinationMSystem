@@ -37,12 +37,14 @@ public class ViewController {
     public String fun2(@PathVariable String citizenId,Model model) {
         Citizen citizen = citizenDAO.getCitizenDetailsById(citizenId);
         model.addAttribute("citizen",citizen);
+        model.addAttribute("message","Details Updation");
         return "register";
     }
 
     @GetMapping("/citizen/registeration")
     public String showRegistrationForm(Model model) {
         model.addAttribute("citizen",new Citizen());
+        model.addAttribute("message","Registeration");
         return "register";
     }
 
