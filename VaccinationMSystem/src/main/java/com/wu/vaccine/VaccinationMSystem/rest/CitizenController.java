@@ -22,7 +22,7 @@ import java.util.List;
 import static com.wu.vaccine.VaccinationMSystem.DAO.CitizenDAOImpl.is120DaysDifference;
 
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class CitizenController {
     private CitizenDAO citizenDAO;
@@ -31,40 +31,30 @@ public class CitizenController {
     }
     //
     @GetMapping("/citizen")
-    public String getCitizens(Model theModel) {
+    public List<Citizen> getCitizens() {
         List<Citizen> res = citizenDAO.getAllCitizenDetails();
-        theModel.addAttribute("citizens",res);
-        return "citizen";
+        return res;
     }
 
     @GetMapping("/citizen/{citizenId}")
-    public String fun2(@PathVariable String citizenId) {
+    public Citizen fun2(@PathVariable String citizenId) {
         Citizen citizen = citizenDAO.getCitizenDetailsById(citizenId);
-        return "redirect:/";
+        return citizen;
     }
 
-    @GetMapping("/citizen/registeration")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("citizen",new Citizen());
-        return "register";
-    }
 
 
     //api/citizen/register
     @PostMapping("/citizen/register")
-    public String addcitizen(@ModelAttribute("citizen") Citizen thecitizen) {
-        LocalDate currentDate = LocalDate.now();
-        thecitizen.setLast_vaccinated(currentDate.toString());
-        thecitizen.setCitizenId(thecitizen.getAddhar_no());
-        System.out.println("Hlllo world");
+    public Citizen addcitizen(@ModelAttribute("citizen") Citizen thecitizen) {
         citizenDAO.registerCitizen(thecitizen);
-        return "redirect:/";
+        return thecitizen;
 //        return "redirect:dashboard";
     }
 
 
     @DeleteMapping("/citizen/{citizenId}")
-    public String deleterCustomer(@PathVariable String citizenId) {
+    public Citizen deleterCustomer(@PathVariable String citizenId) {
         Citizen citi = citizenDAO.getCitizenDetailsById(citizenId);
         LocalDate current = LocalDate.now();
 //        if(is120DaysDifference(current,LocalDate.parse(citi.getLast_vaccinated()))){
@@ -74,7 +64,7 @@ public class CitizenController {
 
 
         citizenDAO.deleteCitizenDetails(citi);
-        return "citizen details deleted";
+       return citi;
     }
 
     @GetMapping("/citizen/status/{citizenId}")
@@ -83,9 +73,9 @@ public class CitizenController {
     }
 
     @GetMapping("/citizens/status/{status}")
-    public String fun4(@PathVariable String status) {
+    public List<Citizen> fun4(@PathVariable String status) {
         List<Citizen> citi = citizenDAO.getAllCitizenDetailsByStatus(status);
-        return "dashboard";
+        return citi;
     }
 
 

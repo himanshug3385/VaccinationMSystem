@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Controller
+@RestController
 @RequestMapping("/api")
 public class DoseController {
     private DoseDAO doseDAO;
@@ -21,10 +21,9 @@ public class DoseController {
         return doseDAO.getDoseDetailsByCitizenId(citizenId);
     }
     @GetMapping("/doses")
-    public String fdljf(Model model){
+    public List<Dose> fdljf(){
         List<Dose> res =doseDAO.getDoseDetails();
-        model.addAttribute("doses",res);
-        return "dose";
+       return res;
     }
 
     @GetMapping("/dose/details/{doseId}")

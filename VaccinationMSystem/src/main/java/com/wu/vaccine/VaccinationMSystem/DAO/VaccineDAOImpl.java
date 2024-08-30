@@ -46,21 +46,25 @@ public class VaccineDAOImpl implements VaccineDAO {
         if (is120DaysDifference(curr, LocalDate.parse(c.getLast_vaccinated())))
             //throw exception
             c.setLast_vaccinated(curr.toString());
-        entityManager.merge(c);  // citizen updated;
+         // citizen updated;
         theQuery = ss.createQuery("From Vaccine where citizenId=:theid", Vaccine.class);
         theQuery.setParameter("theid", citizenId);
         try {
             Vaccine v = (Vaccine) theQuery.getSingleResult();
             if (v.getDose2Id().equals("NA")) {
+                c.setVaccination_status("FULLY");
+
                 Dose entry = new Dose(citizenId, "Shubhangi Kumari", curr.toString(), "Covishield", citizenId + "B");
                 entityManager.merge(entry);
                 //Dose(String citizenId, String doseGivenBy, String given_date,  String doseName, String doseId)
                 v.setDose2Id(citizenId + "B");
             } else if (v.getDose3Id().equals("NA")) {
+                c.setVaccination_status("BOOSTER");
                 Dose entry = new Dose(citizenId, "Shubhangi Kumari", curr.toString(), "Covishield", citizenId + "C");
                 entityManager.merge(entry);
                 v.setDose3Id(citizenId + "C");
             }
+            entityManager.merge(c);
             entityManager.merge(v);
         } catch (Exception e) {
             return;

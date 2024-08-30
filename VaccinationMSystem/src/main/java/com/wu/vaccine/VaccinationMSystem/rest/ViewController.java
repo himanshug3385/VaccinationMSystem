@@ -6,6 +6,7 @@ import com.wu.vaccine.VaccinationMSystem.DAO.VaccineDAO;
 import com.wu.vaccine.VaccinationMSystem.entity.Citizen;
 import com.wu.vaccine.VaccinationMSystem.entity.Dose;
 import com.wu.vaccine.VaccinationMSystem.entity.Vaccine;
+import com.wu.vaccine.VaccinationMSystem.exception.CitizenAlreadyExistException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class ViewController {
     @GetMapping("/citizen/{citizenId}")
     public String fun2(@PathVariable String citizenId) {
         Citizen citizen = citizenDAO.getCitizenDetailsById(citizenId);
-        return "redirect:/";
+        return "redirect:/view";
     }
 
     @GetMapping("/citizen/registeration")
@@ -48,12 +49,14 @@ public class ViewController {
     //api/citizen/register
     @PostMapping("/citizen/register")
     public String addcitizen(@ModelAttribute("citizen") Citizen thecitizen) {
+        if(citizenDAO.checkIfCitizenExist(thecitizen.getAddhar_no()))
+            throw new CitizenAlreadyExistException("Sorry! You are already Exists!!");
         LocalDate currentDate = LocalDate.now();
         thecitizen.setLast_vaccinated(currentDate.toString());
         thecitizen.setCitizenId(thecitizen.getAddhar_no());
         System.out.println("Hlllo world");
         citizenDAO.registerCitizen(thecitizen);
-        return "redirect:/";
+        return "redirect:/view";
 //        return "redirect:dashboard";
     }
 
@@ -104,7 +107,7 @@ public class ViewController {
     @PostMapping("/vaccine/update")
     public String takeDose(@ModelAttribute("vaccine") Vaccine vaccine) {
         vaccineDAO.updateVaccineDetails(vaccine.getCitizenId());
-        return "redirect:/";
+        return "redirect:/view";
 
     }
 
@@ -138,7 +141,7 @@ public class ViewController {
             model.addAttribute("alertMessage", "Operation Not Allowed");
             return "404Page";
         }
-        return "redirect:/";
+        return "redirect:/view";
     }
 
     // Dose Controller

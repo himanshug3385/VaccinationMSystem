@@ -29,8 +29,11 @@ public class CitizenDAOImpl implements CitizenDAO{
     @Transactional
     @Override
     public Citizen registerCitizen(Citizen citizen) {
-        Citizen res=  entityManager.merge(citizen);
+        citizen.setVaccination_status("PARTIAL");
         LocalDate currentDate = LocalDate.now();
+        citizen.setLast_vaccinated(currentDate.toString());
+        citizen.setCitizenId(citizen.getAddhar_no());
+        Citizen res=  entityManager.merge(citizen);
         entityManager.merge(new Vaccine(citizen.getCitizenId(),citizen.getCitizenId(),citizen.getCitizenId()+"A","NA","NA","pune"));
         entityManager.merge(new Dose(citizen.getCitizenId(),"Shubhangi Kumari",currentDate.toString() ,"Covishield",citizen.getCitizenId()+"A"));
         return res;

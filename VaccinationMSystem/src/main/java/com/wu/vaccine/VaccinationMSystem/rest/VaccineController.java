@@ -22,7 +22,7 @@ import java.util.List;
 
 
 
-@Controller
+@RestController
 
 
 public class VaccineController {
@@ -39,11 +39,11 @@ public class VaccineController {
 
     @GetMapping("/")
 
-    public String vaccineDetails(Model model) {
+    public List<Vaccine> vaccineDetails() {
 
         List<Vaccine> res = vaccineDAO.getAllVaccineDetails();
-        model.addAttribute("vaccineData", res);
-        return "dashboard";
+
+        return res;
 
     }
 
@@ -56,23 +56,23 @@ public class VaccineController {
     }
 
     @PostMapping("/api/vaccine/update")
-    public String takeDose(@ModelAttribute("vaccine") Vaccine vaccine) {
+    public Vaccine takeDose(@ModelAttribute("vaccine") Vaccine vaccine) {
         vaccineDAO.updateVaccineDetails(vaccine.getCitizenId());
-        return "redirect:/";
+        return vaccine;
 
     }
 
-    // /api/vaccine/update/{citizenId}(citizenId=${vaccine.citizenId})
-    @GetMapping("/api/vaccine/update/{citizenId}")
-    public String funf(@PathVariable String citizenId, Model model) {
-        Vaccine vaccine = vaccineDAO.getVaccineDetailsByID(citizenId);
-        List<Dose> doses = doseDAO.getDoseDetailsByCitizenId(citizenId);
-        model.addAttribute("vaccines", vaccine);
-        model.addAttribute("doses", doses);
-
-        System.out.println(doses);
-        return "TakeDose";
-    }
+//    // /api/vaccine/update/{citizenId}(citizenId=${vaccine.citizenId})
+//    @GetMapping("/api/vaccine/update/{citizenId}")
+//    public String funf(@PathVariable String citizenId, Model model) {
+//        Vaccine vaccine = vaccineDAO.getVaccineDetailsByID(citizenId);
+//        List<Dose> doses = doseDAO.getDoseDetailsByCitizenId(citizenId);
+//        model.addAttribute("vaccines", vaccine);
+//        model.addAttribute("doses", doses);
+//
+//        System.out.println(doses);
+//        return "TakeDose";
+//    }
 
     @GetMapping("/api/vaccine/{citizenId}")
     public Vaccine vaccineDetailsById(@PathVariable String citizenId) {
@@ -89,6 +89,6 @@ public class VaccineController {
     public String deleteVaccineDetails(@PathVariable(name = "citizenId") String citizendId) {
         String result = vaccineDAO.deleteVaccineDetails(citizendId);
         //  redirectAttributes.addFlashAttribute("result", result);
-        return "redirect:/";
+        return result;
     }
 }
