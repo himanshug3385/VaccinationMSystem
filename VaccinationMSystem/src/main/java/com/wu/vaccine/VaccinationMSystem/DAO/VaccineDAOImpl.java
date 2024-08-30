@@ -97,5 +97,29 @@ public class VaccineDAOImpl implements VaccineDAO {
         }
 
     }
+    @Transactional
+    @Override
+    public String deleteVaccineDetails(String citizenId) {
+        Session ss = entityManager.unwrap(Session.class);
+        Query theQuery = ss.createQuery("From Vaccine where citizenId=:theid", Citizen.class);
+        theQuery.setParameter("theid", citizenId);
+        Vaccine obj = (Vaccine) theQuery.getSingleResult();
+        if(!obj.getDose3Id().equals("NA")){
+           theQuery = ss.createQuery("From Citizen where citizenId=:theid", Citizen.class);
+            theQuery.setParameter("theid", citizenId);
+            Citizen obj2 = (Citizen) theQuery.getSingleResult();
+            entityManager.remove(obj2);
+            entityManager.remove(obj);
+            theQuery = ss.createQuery("From Dose where citizenId=:theid", Citizen.class);
+            theQuery.setParameter("theid", citizenId);
+            List<Dose> obj3=theQuery.getResultList();
+            for(Dose d:obj3)
+                entityManager.remove(d);
+
+            return "Details Deleted Successfully";
+        }
+
+        return "Operation Not Allowed";
+    }
 }
 

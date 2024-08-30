@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class VaccineController {
     public VaccineController(VaccineDAO thevaccine, DoseDAO thedoseDAO) {
 
         this.vaccineDAO = thevaccine;
-        this.doseDAO=thedoseDAO;
+        this.doseDAO = thedoseDAO;
 
     }
 
@@ -40,8 +41,8 @@ public class VaccineController {
 
     public String vaccineDetails(Model model) {
 
-        List<Vaccine>res= vaccineDAO.getAllVaccineDetails();
-        model.addAttribute("vaccineData",res);
+        List<Vaccine> res = vaccineDAO.getAllVaccineDetails();
+        model.addAttribute("vaccineData", res);
         return "dashboard";
 
     }
@@ -53,29 +54,41 @@ public class VaccineController {
         return vacc;
 
     }
+
     @PostMapping("/api/vaccine/update")
-    public String takeDose(@ModelAttribute("vaccine") Vaccine vaccine){
+    public String takeDose(@ModelAttribute("vaccine") Vaccine vaccine) {
         vaccineDAO.updateVaccineDetails(vaccine.getCitizenId());
         return "redirect:/";
 
     }
+
+    // /api/vaccine/update/{citizenId}(citizenId=${vaccine.citizenId})
     @GetMapping("/api/vaccine/update/{citizenId}")
-    public String funf(@PathVariable String citizenId,Model model){
-        Vaccine vaccine=vaccineDAO.getVaccineDetailsByID(citizenId);
-        List<Dose> doses= doseDAO.getDoseDetailsByCitizenId(citizenId);
-        model.addAttribute("vaccines",vaccine);
-        model.addAttribute("doses",doses);
+    public String funf(@PathVariable String citizenId, Model model) {
+        Vaccine vaccine = vaccineDAO.getVaccineDetailsByID(citizenId);
+        List<Dose> doses = doseDAO.getDoseDetailsByCitizenId(citizenId);
+        model.addAttribute("vaccines", vaccine);
+        model.addAttribute("doses", doses);
 
         System.out.println(doses);
         return "TakeDose";
     }
+
     @GetMapping("/api/vaccine/{citizenId}")
     public Vaccine vaccineDetailsById(@PathVariable String citizenId) {
 
         Vaccine vacc = vaccineDAO.getVaccineDetailsByID(citizenId);
 
-        return  vacc;
+        return vacc;
 
     }
 
+    ///api/vaccine/delete(citizenId=${vaccine.citizenId})}
+    //@{/api/vaccine/delete/{citizenId}(citizenId=${vaccine.citizenId})}
+    @GetMapping("/api/vaccine/delete/{citizenId}")
+    public String deleteVaccineDetails(@PathVariable(name = "citizenId") String citizendId) {
+        String result = vaccineDAO.deleteVaccineDetails(citizendId);
+        //  redirectAttributes.addFlashAttribute("result", result);
+        return "redirect:/";
+    }
 }

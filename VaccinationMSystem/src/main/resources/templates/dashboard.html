@@ -6,6 +6,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Vaccination System</a>
@@ -15,13 +17,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/api/citizen/registeration}">Register New Citizen</a>
+                <a class="nav-link" th:href="@{/view/citizen/registeration}">Register New Citizen</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/api/citizen}">Get Citizen Details</a>
+                <a class="nav-link" th:href="@{/view/citizen}">Get Citizen Details</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/api/doses}">Get Dose Details</a>
+                <a class="nav-link" th:href="@{/view/doses}">Get Dose Details</a>
             </li>
         </ul>
     </div>
@@ -52,8 +54,14 @@
             <td th:text="${vaccine.dose3Id}"></td>
             <td th:text="${vaccine.vacc_address}"></td>
             <td>
-                <a class="btn btn-warning btn-sm" th:href="@{/api/vaccine/update/{citizenId}(citizenId=${vaccine.citizenId})}">Update</a>
-                <a class="btn btn-danger btn-sm" th:href="@{/vaccine/delete(citizenId=${vaccine.citizenId})}" onclick="return confirm('Are you sure you want to delete this vaccine?');">Delete</a>
+                <a class="btn btn-warning btn-sm" th:href="@{/view/vaccine/update/{citizenId}(citizenId=${vaccine.citizenId})}">Update</a>
+<!--                <form th:action="@{/api/vaccine/delete}" th:object="${vaccine}" method="post" style="display:inline;">-->
+<!--                    <input type="hidden" name="citizenId" th:value="${vaccine.citizenId}">-->
+<!--                    <button type="submit">Update Dose</button>-->
+<!--                </form>-->
+<!--                <a class="btn btn-danger btn-sm" href="#" onclick="deleteVaccine(${vaccine.citizenId}); return false;">Delete</a>-->
+
+                <a class="btn btn-danger btn-sm" th:href="@{'/view/vaccine/delete/'+${vaccine.citizenId}}" >Delete</a>
             </td>
         </tr>
         </tbody>
@@ -65,4 +73,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

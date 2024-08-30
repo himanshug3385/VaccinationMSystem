@@ -43,7 +43,7 @@
             <td th:text="${vaccine.dose3Id}"></td>
             <td th:text="${vaccine.vacc_address}"></td>
             <td>
-                <form th:action="@{/api/vaccine/update}" th:object="${vaccine}" method="post" style="display:inline;">
+                <form th:action="@{/view/vaccine/update}" th:object="${vaccine}" method="post" style="display:inline;">
                     <input type="hidden" name="citizenId" th:value="${vaccine.citizenId}">
                     <button type="submit">Update Dose</button>
                 </form>

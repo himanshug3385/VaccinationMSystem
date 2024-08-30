@@ -11,6 +11,7 @@ public interface VaccineDAO {
     void updateVaccineDetails(String citizenId);
     String getCertificateIdById(String citizenId);
     Vaccine getVaccineDetailsByID(String citizenId);
+    String deleteVaccineDetails(String citizenId);
 
 }
 

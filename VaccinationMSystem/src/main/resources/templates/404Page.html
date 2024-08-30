@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result Page</title>
+    <style>
+        .alert {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div th:if="${alertMessage}" class="alert">
+    <span th:text="${alertMessage}"></span>
+</div>
+</body>
+</html>

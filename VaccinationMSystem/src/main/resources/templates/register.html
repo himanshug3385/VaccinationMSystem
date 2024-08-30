@@ -49,7 +49,7 @@
 <div id="formWrapper">
     <h1>Citizen Registration</h1>
 
-    <form id="registrationForm" action="#" th:action="@{/api/citizen/register}" th:object="${citizen}" method="POST">
+    <form id="registrationForm" action="#" th:action="@{/view/citizen/register}" th:object="${citizen}" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" th:field="*{name}" class="form-control" required />
