@@ -34,9 +34,10 @@ public class ViewController {
     }
 
     @GetMapping("/citizen/{citizenId}")
-    public String fun2(@PathVariable String citizenId) {
+    public String fun2(@PathVariable String citizenId,Model model) {
         Citizen citizen = citizenDAO.getCitizenDetailsById(citizenId);
-        return "redirect:/view";
+        model.addAttribute("citizen",citizen);
+        return "register";
     }
 
     @GetMapping("/citizen/registeration")
@@ -49,12 +50,12 @@ public class ViewController {
     //api/citizen/register
     @PostMapping("/citizen/register")
     public String addcitizen(@ModelAttribute("citizen") Citizen thecitizen) {
-        if(citizenDAO.checkIfCitizenExist(thecitizen.getAddhar_no()))
-            throw new CitizenAlreadyExistException("Sorry! You are already Exists!!");
+//        if(citizenDAO.checkIfCitizenExist(thecitizen.getAddhar_no()))
+//            throw new CitizenAlreadyExistException("Sorry! You are already Exists!!");
         LocalDate currentDate = LocalDate.now();
         thecitizen.setLast_vaccinated(currentDate.toString());
         thecitizen.setCitizenId(thecitizen.getAddhar_no());
-        System.out.println("Hlllo world");
+
         citizenDAO.registerCitizen(thecitizen);
         return "redirect:/view";
 //        return "redirect:dashboard";
@@ -148,7 +149,9 @@ public class ViewController {
 
     @GetMapping("/dose/{citizenId}")
     public List<Dose> DoseDetailsByCitizenId(@PathVariable String citizenId){
-        return doseDAO.getDoseDetailsByCitizenId(citizenId);
+        List<Dose>res= doseDAO.getDoseDetailsByCitizenId(citizenId);
+
+        return res;
     }
     @GetMapping("/doses")
     public String fdljf(Model model){
@@ -158,8 +161,10 @@ public class ViewController {
     }
 
     @GetMapping("/dose/details/{doseId}")
-    public Dose DoseDetailsByDoseId(@PathVariable String doseId){
-        return doseDAO.getDoseDetailsByDoseId(doseId);
+    public String DoseDetailsByDoseId(@PathVariable String doseId, Model model){
+        Dose dose = doseDAO.getDoseDetailsByDoseId(doseId);
+        model.addAttribute("doses",dose);
+        return "dose";
     }
 
     @DeleteMapping("/dose/{doseId}")

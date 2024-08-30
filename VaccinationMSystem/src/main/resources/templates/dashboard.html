@@ -6,11 +6,78 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Navbar styles */
+    .navbar {
+        width: 100%;
+        background-color: #4CAF50;
+        padding: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Reduced elevation */
+        display: flex; /* Flexbox for alignment */
+        justify-content: space-around;
+    }
+
+    .navbar a {
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .navbar a:hover {
+        background-color: #ededeb; /* Matching color on hover */
+        color: #fff;
+    }
+
+    /* Table styles */
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    td {
+        background-color: #ffffff;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Vaccination System</a>
+    <a class="navbar-brand" >Vaccination System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,7 +99,6 @@
 <div class="container mt-4">
     <h1 class="mb-4">DASHBOARD</h1>
 
-
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -48,20 +114,22 @@
         <tbody>
         <tr th:each="vaccine : ${vaccineData}">
             <td th:text="${vaccine.certificateNo}"></td>
-            <td th:text="${vaccine.citizenId}"></td>
-            <td th:text="${vaccine.dose1Id}"></td>
-            <td th:text="${vaccine.dose2Id}"></td>
-            <td th:text="${vaccine.dose3Id}"></td>
+            <td>
+                <a th:href="@{'/view/citizen/' + ${vaccine.citizenId}}" th:text="${vaccine.citizenId}" style="color: inherit; text-decoration: none;"></a>
+            </td>
+            <td>
+                <a th:href="@{'/view/dose/details/' + ${vaccine.dose1Id}}" th:text="${vaccine.dose1Id}" style="color: inherit; text-decoration: none;"></a>
+            </td>
+            <td>
+                <a th:href="@{'/view/dose/details/' + ${vaccine.dose2Id}}" th:text="${vaccine.dose2Id}" style="color: inherit; text-decoration: none;"></a>
+            </td>
+            <td>
+                <a th:href="@{'/view/dose/details/' + ${vaccine.dose3Id}}" th:text="${vaccine.dose3Id}" style="color: inherit; text-decoration: none;"></a>
+            </td>
             <td th:text="${vaccine.vacc_address}"></td>
             <td>
                 <a class="btn btn-warning btn-sm" th:href="@{/view/vaccine/update/{citizenId}(citizenId=${vaccine.citizenId})}">Update</a>
-<!--                <form th:action="@{/api/vaccine/delete}" th:object="${vaccine}" method="post" style="display:inline;">-->
-<!--                    <input type="hidden" name="citizenId" th:value="${vaccine.citizenId}">-->
-<!--                    <button type="submit">Update Dose</button>-->
-<!--                </form>-->
-<!--                <a class="btn btn-danger btn-sm" href="#" onclick="deleteVaccine(${vaccine.citizenId}); return false;">Delete</a>-->
-
-                <a class="btn btn-danger btn-sm" th:href="@{'/view/vaccine/delete/'+${vaccine.citizenId}}" >Delete</a>
+                <a class="btn btn-danger btn-sm" th:href="@{'/view/vaccine/delete/'+${vaccine.citizenId}}">Delete</a>
             </td>
         </tr>
         </tbody>
