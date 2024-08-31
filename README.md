@@ -75,7 +75,7 @@ Dose_Date VARCHAR(30)
 <h4>INSERT INTO Citizen (Citizen_ID, Name, Gender, Age, Contact, Aadhar, Vaccination_Status, Last_Vaccinated)
 VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully', TO_DATE('2008-11-11', 'YYYY-MM-DD'));</h4>
 
-<h2 id="apis">APIs</h2>
+<h2 id="apis">Backend APIs</h2>
 
 <h3 id="citizen-apis">Citizen APIs</h3>
 <ul>
@@ -102,6 +102,15 @@ VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully
     <li>DELETE /api/{doseId} - Delete a dose record by dose ID</li>
 </ul>
 
+<h2>View APIS</h2>
+<ul>
+    <li>GET /view =  DashBoard Page</li>
+    <li>GET /view/citizen = All Citizen Page</li>
+    <li>GET /view/citizen/{citizenId} = Citizen Details Updation Page</li>
+    <li>GET /view/citizen/registeration = Citizen Registration Page </li>
+    <li>GET /view/vaccine/update = Take Dose Page</li>
+</ul>
+<hr>
 <h2 id="getting-started">Getting Started</h2>
 <p>To get a local copy up and running follow these simple steps.</p>
 
