@@ -149,7 +149,7 @@ VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully
     <li>Install Maven dependencies
         <pre><code>mvn install</code></pre>
     </li>
-    <li>Configure the database in <code>application.properties</code></li>
+    <li>Configure the database in <code>application.properties - change you db name and Password, Otherwise project will not run</code></li>
     <li>Run the application
         <pre><code>mvn spring-boot:run</code></pre>
     </li>
