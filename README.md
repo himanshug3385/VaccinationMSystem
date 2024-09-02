@@ -14,19 +14,25 @@
         <li><a href="#contributing">Contributing</a></li>
         <li><a href="#license">License</a></li>
     </ul>
-<h2>DashBoard Page</h2>
+<!-- <h2>DashBoard Page</h2> -->
+
 ![image](https://github.com/user-attachments/assets/f1157f9a-7066-44ff-94c2-4596fb023bb4)
-
+<hr/>
 <h2>Registration Page</h2>
+
 ![image](https://github.com/user-attachments/assets/76c05b4b-ffe6-4423-9efc-fa354152ab65)
-
+<hr/>
 <h2>Citizen List Page</h2>
-![image](https://github.com/user-attachments/assets/cbb3be1f-12b0-4f79-942b-a973e2d3485c)
 
+![image](https://github.com/user-attachments/assets/cbb3be1f-12b0-4f79-942b-a973e2d3485c)
+<hr/>
 <h2>Dose List</h2>
+
 ![image](https://github.com/user-attachments/assets/276633ea-eff5-4bb6-986c-d47d0764208c)
 
+<hr/>
 <h2>Take Dose Page</h2>
+
 ![image](https://github.com/user-attachments/assets/ef70d820-3e96-45e5-a988-771e3f08ad5f)
 
 ### Functionalities
