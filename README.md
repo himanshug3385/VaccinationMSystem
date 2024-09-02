@@ -14,7 +14,27 @@
         <li><a href="#contributing">Contributing</a></li>
         <li><a href="#license">License</a></li>
     </ul>
-    
+<!-- <h2>DashBoard Page</h2> -->
+
+![image](https://github.com/user-attachments/assets/f1157f9a-7066-44ff-94c2-4596fb023bb4)
+<hr/>
+<h2>Registration Page</h2>
+
+![image](https://github.com/user-attachments/assets/76c05b4b-ffe6-4423-9efc-fa354152ab65)
+<hr/>
+<h2>Citizen List Page</h2>
+
+![image](https://github.com/user-attachments/assets/cbb3be1f-12b0-4f79-942b-a973e2d3485c)
+<hr/>
+<h2>Dose List</h2>
+
+![image](https://github.com/user-attachments/assets/276633ea-eff5-4bb6-986c-d47d0764208c)
+
+<hr/>
+<h2>Take Dose Page</h2>
+
+![image](https://github.com/user-attachments/assets/ef70d820-3e96-45e5-a988-771e3f08ad5f)
+
 ### Functionalities
 
 1. **Citizen Registeration**
@@ -42,40 +62,40 @@
 
 <h3>Citizen Table</h3>
 <pre><code>CREATE TABLE Citizen (
-Citizen_ID VARCHAR(12) PRIMARY KEY,             
+Citizen_ID VARCHAR(50) PRIMARY KEY,             
 Name VARCHAR(50) NOT NULL,                    
-Gender VARCHAR(10),                          
+Gender VARCHAR(50),                          
 Age INT,                                      
-Contact VARCHAR(15),                         
-Aadhar VARCHAR(12) UNIQUE,                   
-Vaccination_Status VARCHAR(30),               
-Last_Vaccinated VARCHAR(30)                        
+Contact VARCHAR(50),                         
+Aadhar VARCHAR(50) UNIQUE,                   
+Vaccination_Status VARCHAR(50),               
+Last_Vaccinated VARCHAR(50)                        
     );</code></pre>
 
 <h3>Vaccine Table</h3>
 <pre><code>CREATE TABLE Vaccine (
-Certificate_No VARCHAR(15),
-Citizen_ID VARCHAR(12), 
-Dose1_ID VARCHAR(12),
-Dose2_ID VARCHAR(12),
-Dose3_ID VARCHAR(12),
-Vaccination_Address VARCHAR(20)
+Certificate_No VARCHAR(50),
+Citizen_ID VARCHAR(50), 
+Dose1_ID VARCHAR(50),
+Dose2_ID VARCHAR(50),
+Dose3_ID VARCHAR(50),
+Vaccination_Address VARCHAR(50)
 );</code></pre>
 
 <h3>Dose Table</h3>
 <pre><code>CREATE TABLE Dose (
-Citizen_ID VARCHAR(12),
-Dose_ID VARCHAR(12), 
-Dose_Name VARCHAR(20),
-Vaccinated_By VARCHAR(20),
-Dose_Date VARCHAR(30)
+Citizen_ID VARCHAR(50),
+Dose_ID VARCHAR(50), 
+Dose_Name VARCHAR(50),
+Vaccinated_By VARCHAR(50),
+Dose_Date VARCHAR(50)
 );</code></pre>
 
 <h2>Insertion Example - </h2>
 <h4>INSERT INTO Citizen (Citizen_ID, Name, Gender, Age, Contact, Aadhar, Vaccination_Status, Last_Vaccinated)
 VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully', TO_DATE('2008-11-11', 'YYYY-MM-DD'));</h4>
 
-<h2 id="apis">APIs</h2>
+<h2 id="apis">Backend APIs</h2>
 
 <h3 id="citizen-apis">Citizen APIs</h3>
 <ul>
@@ -102,6 +122,15 @@ VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully
     <li>DELETE /api/{doseId} - Delete a dose record by dose ID</li>
 </ul>
 
+<h2>View APIS</h2>
+<ul>
+    <li>GET /view =  DashBoard Page</li>
+    <li>GET /view/citizen = All Citizen Page</li>
+    <li>GET /view/citizen/{citizenId} = Citizen Details Updation Page</li>
+    <li>GET /view/citizen/registeration = Citizen Registration Page </li>
+    <li>GET /view/vaccine/update = Take Dose Page</li>
+</ul>
+<hr>
 <h2 id="getting-started">Getting Started</h2>
 <p>To get a local copy up and running follow these simple steps.</p>
 
@@ -120,7 +149,7 @@ VALUES ('001', 'Himanshu Gupta', 'Male', 22, '1234567890', '12345678901', 'Fully
     <li>Install Maven dependencies
         <pre><code>mvn install</code></pre>
     </li>
-    <li>Configure the database in <code>application.properties</code></li>
+    <li>Configure the database in <code>application.properties - change you db name and Password, Otherwise project will not run</code></li>
     <li>Run the application
         <pre><code>mvn spring-boot:run</code></pre>
     </li>
