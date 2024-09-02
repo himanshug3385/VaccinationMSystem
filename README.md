@@ -35,6 +35,75 @@
 
 ![image](https://github.com/user-attachments/assets/ef70d820-3e96-45e5-a988-771e3f08ad5f)
 
+## Application Architecture 
+<pre>
++-------------------------+           +---------------------------+
+|    Web Interface        |           |  External Systems/Services |
+|-------------------------|           |---------------------------|
+|  - Dashboard Page       |           |  (e.g., Notification)      |
+|  - Citizen Page         |           |                           |
+|  - Citizen Details Page |           |                           |
+|  - Registration Page    |           |                           |
+|  - Take Dose Page       |           |                           |
++-----------+-------------+           +-----------+---------------+
+            |                                    |
+            v                                    |
++-----------+------------------------------------+-----------------+
+|                  ViewController (Frontend)                        |
+|------------------------------------------------------------------|
+|  - Handles frontend logic and UI interactions                     |
+|  - Communicates with backend controllers via HTTP requests         |
+|  - Renders data for user interactions and display                  |
++-----------+---------------------+--------------------+-------------+
+            |                     |                    |
+            v                     v                    v
++-----------+-----------+ +-------+----------+ +-------+----------+
+|   VaccineController   | |  DoseController  | |  CitizenController |
+|------------------------| |-------------------| |---------------------|
+|  - GET /api/vaccine    | |  - GET /api/dose  | |  - GET /api/citizen |
+|  - GET /api/vaccine/{id}| |  - GET /api/dose/{id}| |  - GET /api/citizen/{id}|
+|  - PUT /api/vaccine/{id}| |  - DELETE /api/dose/{id}| |  - POST /api/citizen/register|
+|  - GET /api/vaccine/certificate/{id}| |  - GET /api/dose/details/{id}| |  - DELETE /api/citizen/{id} |
+|                        | |  - Other Dose APIs| |  - GET /api/citizens/status/{status} |
++-----------+------------+ +------------------+ +---------------------+
+            |                                |
+            v                                v
++-----------+---------------------------------+
+|                   Spring Boot Application                      |
+|------------------------------------------------------------------|
+|  - Contains logic for controllers and services                  |
+|  - Delegates requests to appropriate services                    |
++-----------+---------------------------------+
+            |
+            v
++-----------+---------------------------+     +---------------+-------------+
+|              Database (Schema)        |     |           External APIs       |
+|---------------------------------------|     |                               |
+|   +----------------+   +-------------+ |     |  (e.g., Third-Party APIs)     |
+|   |   Citizen Table|   |  Vaccine Table| |     +------------------------------+
+|   +----------------+   +-------------+ | 
+|   | - Citizen_ID   |   | - Certificate_No| |
+|   | - Name         |   | - Citizen_ID   | |
+|   | - Gender       |   | - Dose1_ID     | |
+|   | - Age          |   | - Dose2_ID     | |
+|   | - Contact      |   | - Dose3_ID     | |
+|   | - Aadhar       |   | - Address      | |
+|   | - Status       |   +---------------+ |
+|   | - Last_Vaccinated|                   |
+|   +----------------+                     |
+|                                          |
+|   +----------------+                    |
+|   |    Dose Table  |                    |
+|   +----------------+                    |
+|   | - Citizen_ID   |                    |
+|   | - Dose_ID      |                    |
+|   | - Dose_Name    |                    |
+|   | - Vaccinated_By|                    |
+|   | - Dose_Date    |                    |
+|   +----------------+                    |
++------------------------------------------+
+</pre>
+
 ### Functionalities
 
 1. **Citizen Registeration**
